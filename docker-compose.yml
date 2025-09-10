@@ -1,7 +1,7 @@
 services:
   web:
     image: php:8.2-apache
-    container_name: php-apache-leboncoin
+    container_name: php-apache-leboncoin-kevin
     build:
       context: .
       dockerfile: Dockerfile
@@ -23,7 +23,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.mysql
-    container_name: mysql-db-leboncoin
+    container_name: mysql-db-leboncoin-kevin
     restart: always
     environment:
       MYSQL_DATABASE: leboncoin
@@ -38,7 +38,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin-leboncoin
+    container_name: phpmyadmin-leboncoin-kevin
     depends_on:
       - db
     ports:
