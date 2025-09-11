@@ -18,7 +18,7 @@ class Database
      * 
      * C'est pas nécessaire de fermer manuellement la connexion après avoir terminé d’utiliser un script PDO.
      * Elle est automatiquement fermée lorsque l’objet PDO est détruit ou lorsque le script se termine.
-     * @return void
+     * @return PDO Retourne un objet PDO pour pouvoir se connecter à la base de données.
      */
     public static function getConnection()
     {
@@ -31,8 +31,10 @@ class Database
             /**
              * Une connexion PDO à une base de données nécessite la création d’un nouvel objet PDO avec un nom de source de données (DSN), un nom d’utilisateur et un mot de passe.
              */
-            $connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+            $connection = new PDO("mysql:host=$host;dbname=$dbname", $usernameDatabase, $passwordDatabase);
             echo "Connection à la base de données $dbname avec $host réussie.";
+            
+            return $connection;
 
             /**
              * Un message d'erreur sera envoyé à l'utilisateur si la connection n'a pas marché.
