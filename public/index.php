@@ -1,14 +1,16 @@
 <?php
 
 // use App\Models\DatabaseConnection\Database;
+
+use App\Models\Annonce;
 use App\Models\User;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/routeur.php";
 
-$objUser = new User();
+$objUser = new Annonce();
 // $objUser->createUser("le.legendaire.cos","kevin.lioust@outlook.com","ConventionsGeek");
 
-// $objUser->findById(3);
+// $objUser->findByUser(19);
 
 ?>
