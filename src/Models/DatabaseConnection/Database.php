@@ -24,6 +24,10 @@ class Database
     {
         // On appelle les informations de configuration de l'utilisateur pour se connecter à la base de données.
         require_once __DIR__ . "/pdoconfig.php";
+        var_dump($host);
+        var_dump($dbname);
+        var_dump($usernameDatabase);
+        var_dump($passwordDatabase);
 
         // On essaye de se connecter.
         try {

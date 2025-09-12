@@ -13,7 +13,7 @@ $errors = [];
 
 // Si la méthode utilisée pour envoyer des données depuis le formulaire de création de compte est POST, alors on récupère les informations que l'utilisateur à entrées
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $pseudo = htmlspecialchars($_POST['pseudo']); // Protection contre les injections XSS
+    $username = htmlspecialchars($_POST['username']); // Protection contre les injections XSS
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe
     $email = htmlspecialchars($_POST['email']);
 }

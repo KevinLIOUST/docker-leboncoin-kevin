@@ -83,6 +83,14 @@ class UserController
     }
 
     /**
+     * Méthode pour aller sur le profil de l'utilisateur en question qui s'est connecté au site Internet.
+     * @return void
+     */
+    public function profil() {
+        require_once __DIR__ . "/../Views/profil.php";
+    }
+
+    /**
      * Méthode pour pouvoir se connecter.
      * @return void
      */
