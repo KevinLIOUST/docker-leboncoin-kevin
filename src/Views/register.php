@@ -89,8 +89,13 @@ var_dump($_POST);
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center mt-3">
-                    <span class="text-danger"><?= isset($errors['matchPas']) ? $errors['matchPas'] : '' ?></span>
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <div>
+                            <label class="mt-3 text-left" for="cgu">J'accepte les conditions générales d'utilisation <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['cgu']) ? $errors['cgu'] : '' ?></span></label>
+                            <input class="mt-1" id="cgu" type="checkbox" name="cgu" placeholder="mot de passe" value="<?= $_POST['cgu'] ?? '' ?>">
+                        </div>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     <input type="submit" class="btn btn-connexion" value="Se connecter">

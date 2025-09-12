@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Nom virtuel qui regroupe des classes, fonctions, constantes et autres entités de code pour éviter les conflits de noms, notamment avec des bibliothèques tierces ou dans de grands projets.
  * Cette ligne doit être toujours en premier dans le code.
-*/
+ */
 
 namespace App\Models\DatabaseConnection;
 
@@ -22,12 +23,25 @@ class Database
      */
     public static function getConnection()
     {
-        // On appelle les informations de configuration de l'utilisateur pour se connecter à la base de données.
-        require_once __DIR__ . "/pdoconfig.php";
-        var_dump($host);
-        var_dump($dbname);
-        var_dump($usernameDatabase);
-        var_dump($passwordDatabase);
+        /**
+         * Le DSN (Data Source Name) définit le type de base de données, le nom de la base de données et toute autre information relative à la base de données si nécessaire.
+         * Ce sont les variables et les valeurs déclarées dans le fichier pdoconfig.php, référencées une fois par la ligne require_once dans le fichier Database.php.
+         */
+
+        // Variable d'environnement MYSQL_HOST
+        $host = "db";
+
+        // Le nom de la base de données
+        // Variable d'environnement MYSQL_DATABASE
+        $dbname = "leboncoin";
+
+        // Le nom de l'utilisateur
+        // Variable d'environnement MYSQL_USER
+        $usernameDatabase = "root";
+
+        // Le mot de passe de l'utilisateur
+        // Variable d'environnement MYSQL_PASSWORD
+        $passwordDatabase = "root";
 
         // On essaye de se connecter.
         try {
@@ -37,12 +51,12 @@ class Database
              */
             $connection = new PDO("mysql:host=$host;dbname=$dbname", $usernameDatabase, $passwordDatabase);
             echo "Connection à la base de données $dbname avec $host réussie.";
-            
+
             return $connection;
 
             /**
              * Un message d'erreur sera envoyé à l'utilisateur si la connection n'a pas marché.
-            */
+             */
         } catch (PDOException $erreurPDOException) {
             die("Impossible de se connecter à la base de données $dbname :" . $erreurPDOException->getMessage());
         }

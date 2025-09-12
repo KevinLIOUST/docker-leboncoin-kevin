@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\DatabaseConnection\Database;
 use App\Models\User;
 
 // Classe UserController pour vérifier les actions de l'utilisateur pour se connecter, se déconnecter et se créer un compte
@@ -77,8 +78,12 @@ class UserController
                 // si la case n'est pas cochée, on créé une erreur
                 $errors["cgu"] = "Vous devez accepter les CGU.";
             }
-        }
 
+            if (empty($errors)) {
+                $user = new User();
+                $user->createUser($_POST['username'], $_POST["email"], $_POST["password"]);
+            }
+        }
         require_once __DIR__ . "/../Views/register.php";
     }
 
@@ -86,7 +91,8 @@ class UserController
      * Méthode pour aller sur le profil de l'utilisateur en question qui s'est connecté au site Internet.
      * @return void
      */
-    public function profil() {
+    public function profil()
+    {
         require_once __DIR__ . "/../Views/profil.php";
     }
 
