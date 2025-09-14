@@ -11,13 +11,6 @@ use PDOException;
 // On déclare un tableau vide $errors pour stocker les messages d'erreurs pôur les afficher dans les vues en temps voulu.
 $errors = [];
 
-// Si la méthode utilisée pour envoyer des données depuis le formulaire de création de compte est POST, alors on récupère les informations que l'utilisateur à entrées
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = htmlspecialchars($_POST['username']); // Protection contre les injections XSS
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe
-    $email = htmlspecialchars($_POST['email']);
-}
-
 // Classe User pour gérer les utilisateurs avec la base de données
 class User
 {
@@ -31,6 +24,13 @@ class User
      */
     public function createUser(string $pseudo, string $email, string $password)
     {
+        // Si la méthode utilisée pour envoyer des données depuis le formulaire de création de compte est POST, alors on récupère les informations que l'utilisateur à entrées
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $pseudo = htmlspecialchars($_POST['username']); // Protection contre les injections XSS
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe
+            $email = htmlspecialchars($_POST['email']);
+        }
+
         // On essaye de se connecter
         try {
 
@@ -72,7 +72,8 @@ class User
      * @param string $email L'email de l'utilisateur à trouver
      * @return array Retourne un tableau associatif avec toutes les informations sur l'email de l'utilisateur.
      */
-    public function findByEmail(string $email) {
+    public function findByEmail(string $email)
+    {
 
         // On essaye de se connnecter
         try {
@@ -88,10 +89,10 @@ class User
 
             // On exécute la requête SQL.
             $stmt->execute();
-            
+
             // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+
             // On regarde s'il n'y a pas de données.
             // Si c'est vide alors l'adresse mail n'a pas été trouvée.
             if (empty($data)) {
@@ -106,7 +107,6 @@ class User
 
             // On retourne les données sous forme d'array (Tableau associatif).
             return $data;
-
         }
 
         // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que cette adresse mail n'a pas été trouvée dans la base de données.
@@ -120,7 +120,8 @@ class User
      * @param string $id L'id de l'utilisateur à trouver
      * @return array Retourne un tableau associatif avec toutes les informations sur l'email de l'utilisateur en fonction de son id.
      */
-    public function findById(int $id) {
+    public function findById(int $id)
+    {
 
         // On essaye de se connnecter
         try {
@@ -136,10 +137,10 @@ class User
 
             // On exécute la requête SQL.
             $stmt->execute();
-            
+
             // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+
             // On regarder s'il n'y a pas de données.
             // Si c'est vide, alors l'id n'a pas été trouvé.
             if (empty($data)) {
@@ -154,7 +155,6 @@ class User
 
             // Les données retournées sous forme de tableau associatif.
             return $data;
-
         }
 
         // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que cet id n'a pas été trouvé dans la base de données.
@@ -168,7 +168,8 @@ class User
      * @param string $email L'email en question.
      * @return bool Retourne true si le mail existe, false s'il n'existe pas
      */
-    public static function checkMail(string $email) {
+    public static function checkMail(string $email)
+    {
 
         // On essaye de se connecter.
         try {

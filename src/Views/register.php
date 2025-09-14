@@ -1,7 +1,7 @@
 <?php
 // session_start();
 
-var_dump($_POST);
+// var_dump($_POST);
 ?>
 
 <!DOCTYPE html>
@@ -31,18 +31,26 @@ var_dump($_POST);
         <div class="d-flex justify-content-center align-items-center">
             <a class="liens-design" href="index.php?url=register">Créer un compte</a>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=login">Se connecter</a>
-        </div>
+        <?php if (isset($_SESSION["user"])) { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="liens-design" href="index.php?url=logout">Se déconnecter</a>
+            </div>
+        <?php } else { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="liens-design" href="index.php?url=login">Se connecter</a>
+            </div>
+        <?php } ?>
         <div class="d-flex justify-content-center align-items-center">
             <a class="liens-design" href="index.php?url=annonces">Voir les annonces disponibles</a>
         </div>
         <div class="d-flex justify-content-center align-items-center">
             <a class="liens-design" href="index.php?url=create">Créer une annonce</a>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=profil">Voir le profil de l'utilisateur</a>
-        </div>
+        <?php if (isset($_SESSION["user"])) { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="liens-design" href="index.php?url=profil">Voir le profil de <?= $_SESSION["user"][0] ?></a>
+            </div>
+        <?php } ?>
     </header>
 
     <main>
@@ -52,7 +60,14 @@ var_dump($_POST);
                 <div class="d-flex justify-content-center mb-3">
                     <div>
                         <div>
-                            <label class="text-left" for="username">Choisir un pseudo (nom d'utilisateur) <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['username']) ? $errors['username'] : '' ?></span></label>
+                            <label class="text-left" for="username">Choisir un pseudo (nom d'utilisateur) <span class="text-danger">*</span>
+                                <?php if (isset($errors['username'])) { ?>
+                                    <span class="text-danger"><?= $errors['username'] ?></span>
+                                <?php } else { ?>
+                                    <?php if (isset($reussi["username"])) { ?>
+                                        <span class="text-success"><?= $reussi['username'] ?></span>
+                                    <?php } ?>
+                                <?php } ?></label>
                         </div>
                         <div class="text-center">
                             <input class="mt-1 taille-input design-input" id="username" type="text" name="username" placeholder="username" value="<?= $_POST['username'] ?? '' ?>">
@@ -62,7 +77,14 @@ var_dump($_POST);
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="text-left" for="email">Adresse Email <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['email']) ? $errors['email'] : '' ?></span></label>
+                            <label class="text-left" for="email">Adresse Email <span class="text-danger">*</span>
+                                <?php if (isset($errors['email'])) { ?>
+                                    <span class="text-danger"><?= $errors['email'] ?></span>
+                                <?php } else { ?>
+                                    <?php if (isset($reussi["email"])) { ?>
+                                        <span class="text-success"><?= $reussi['email'] ?></span>
+                                    <?php } ?>
+                                <?php } ?></label>
                         </div>
                         <div class="text-center">
                             <input class="mt-1 taille-input design-input" id="email" type="text" name="email" placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
@@ -72,7 +94,14 @@ var_dump($_POST);
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="mt-3 text-left" for="password">Mot de passe <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['password']) ? $errors['password'] : '' ?></span></label>
+                            <label class="mt-3 text-left" for="password">Mot de passe <span class="text-danger">*</span>
+                                <?php if (isset($errors['password'])) { ?>
+                                    <span class="text-danger"><?= $errors['password'] ?></span>
+                                <?php } else { ?>
+                                    <?php if (isset($reussi["password"])) { ?>
+                                        <span class="text-success"><?= $reussi['password'] ?></span>
+                                    <?php } ?>
+                                <?php } ?></label>
                         </div>
                         <div class="text-center">
                             <input class="mt-1 taille-input design-input" id="password" type="password" name="password" placeholder="mot de passe" value="<?= $_POST['password'] ?? '' ?>">
@@ -82,7 +111,14 @@ var_dump($_POST);
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="mt-3 text-left" for="confirmPassword">Confirmer le mot de passe <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['confirmPassword']) ? $errors['confirmPassword'] : '' ?></span></label>
+                            <label class="mt-3 text-left" for="confirmPassword">Confirmer le mot de passe <span class="text-danger">*</span>
+                                <?php if (isset($errors['confirmPassword'])) { ?>
+                                    <span class="text-danger"><?= $errors['confirmPassword'] ?></span>
+                                <?php } else { ?>
+                                    <?php if (isset($reussi["confirmPassword"])) { ?>
+                                        <span class="text-success"><?= $reussi['confirmPassword'] ?></span>
+                                    <?php } ?>
+                                <?php } ?></label>
                         </div>
                         <div class="text-center">
                             <input class="mt-1 taille-input design-input" id="confirmPassword" type="password" name="confirmPassword" placeholder="mot de passe" value="<?= $_POST['confirmPassword'] ?? '' ?>">
@@ -92,13 +128,25 @@ var_dump($_POST);
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="mt-3 text-left" for="cgu">J'accepte les conditions générales d'utilisation <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['cgu']) ? $errors['cgu'] : '' ?></span></label>
+                            <label class="mt-3 text-left" for="cgu">J'accepte les conditions générales d'utilisation <span class="text-danger">*</span>
+                                <?php if (isset($errors['cgu'])) { ?>
+                                    <span class="text-danger"><?= $errors['cgu'] ?></span>
+                                <?php } else { ?>
+                                    <?php if (isset($reussi["cgu"])) { ?>
+                                        <span class="text-success"><?= $reussi['cgu'] ?></span>
+                                    <?php } ?>
+                                <?php } ?></label>
                             <input class="mt-1" id="cgu" type="checkbox" name="cgu" placeholder="mot de passe" value="<?= $_POST['cgu'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     <input type="submit" class="btn btn-connexion" value="Se connecter">
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <?php if (isset($reussi['createUser'])) { ?>
+                        <p class="text-success"><b><?= $reussi['createUser'] ?></b></p>
+                    <?php } ?>
                 </div>
             </form>
         </div>

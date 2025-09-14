@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 ?>
 
 <!DOCTYPE html>
@@ -30,22 +30,30 @@ session_start();
         <div class="d-flex justify-content-center align-items-center">
             <a class="liens-design" href="index.php?url=register">Créer un compte</a>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=login">Se connecter</a>
-        </div>
+        <?php if (isset($_SESSION["user"])) { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="liens-design" href="index.php?url=logout">Se déconnecter</a>
+            </div>
+        <?php } else { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="liens-design" href="index.php?url=login">Se connecter</a>
+            </div>
+        <?php } ?>
         <div class="d-flex justify-content-center align-items-center">
             <a class="liens-design" href="index.php?url=annonces">Voir les annonces disponibles</a>
         </div>
         <div class="d-flex justify-content-center align-items-center">
             <a class="liens-design" href="index.php?url=create">Créer une annonce</a>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=profil">Voir le profil de l'utilisateur</a>
-        </div>
+        <?php if (isset($_SESSION["user"])) { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="liens-design" href="index.php?url=profil">Voir le profil de <?= $_SESSION["user"][0] ?></a>
+            </div>
+        <?php } ?>
     </header>
 
     <main>
-        <h1 class="text-center mt-3">Bienvenue à magasin de composants PC spécial geek !</h1>
+        <h1 class="text-center mt-3">Bienvenue au magasin de composants PC spécial geek !</h1>
         <h2 class="text-center mt-5">Ici, vous trouverez plein de composants pour PC, mais designer de façon geek comme par exemple une carte graphique NVIDIA GeForce RTX 5090 ASUS ROG ASTRAL de Zelda !</h2>
         <h2 class="text-center mt-5">Amusez-vous bien, mais faites gaffe à votre thune !</h2>
     </main>

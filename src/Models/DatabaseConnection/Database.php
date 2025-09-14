@@ -50,7 +50,7 @@ class Database
              * Une connexion PDO à une base de données nécessite la création d’un nouvel objet PDO avec un nom de source de données (DSN), un nom d’utilisateur et un mot de passe.
              */
             $connection = new PDO("mysql:host=$host;dbname=$dbname", $usernameDatabase, $passwordDatabase);
-            echo "Connection à la base de données $dbname avec $host réussie.";
+            $message = "Connection à la base de données $dbname avec $host réussie.";
 
             return $connection;
 

@@ -1,16 +1,10 @@
-<?php
-// session_start();
-
-// var_dump($_POST);
-?>
-
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bienvenue</title>
 
     <!-- Lien vers Bootstrap -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
@@ -22,8 +16,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="d-flex flex-column vh-100">
-
+<body>
     <header class="border text-center p-3">
         <div class="d-flex justify-content-center align-items-center">
             <a href="index.php?url=home"><img src="assets/img/Logo_Site_2.png" alt="assets/img/Logo_Site_2.png"></a>
@@ -54,40 +47,12 @@
     </header>
 
     <main>
-        <h1 class="text-center mt-3">Se connecter</h1>
-        <div class="d-flex justify-content-center align-items-center">
-            <form action="" method="POST">
-                <div class="d-flex justify-content-center">
-                    <div>
-                        <div>
-                            <label class="text-left" for="email">Adresse Email <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['email']) ? $errors['email'] : '' ?></span></label>
-                        </div>
-                        <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="email" type="text" name="email" placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <div>
-                        <div>
-                            <label class="mt-3 text-left" for="password">Mot de passe <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['password']) ? $errors['password'] : '' ?></span></label>
-                        </div>
-                        <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="password" type="password" name="password" placeholder="mot de passe" value="<?= $_POST['password'] ?? '' ?>">
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center mt-4">
-                    <input type="submit" class="btn btn-connexion" value="Se connecter">
-                </div>
-            </form>
-        </div>
+        <h1 class="text-center">Bienvenue <?= $_SESSION["user"]["email"] ?></h1>
     </main>
 
     <footer class="mt-auto text-center p-5 mt-3">
         <p>Afpa - 2025 - MVC</p>
     </footer>
-
 </body>
 
 </html>

@@ -32,6 +32,10 @@ switch ($page) {
         $objController->login();
         break;
     
+    case "welcome":
+        include_once __DIR__ . "/../src/Views/welcome.php";
+        break;
+    
     case "profil":
         $objController = new UserController();
         $objController->profil();
@@ -59,5 +63,5 @@ switch ($page) {
 
     default:
         // aucun cas reconnu = on charge la 404
-        require_once __DIR__ . "/../src/Views/page404.php";
+        include_once __DIR__ . "/../src/Views/page404.php";
 }
