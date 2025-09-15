@@ -1,5 +1,9 @@
+<?php
+// var_dump($_SESSION);
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -47,13 +51,13 @@
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
                 <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le
-                    profil de <?= $_SESSION["user"]["email"] ?></a>
+                    profil de <?= $_SESSION["user"]["pseudo"] ?></a>
             </div>
         <?php } ?>
     </header>
 
     <main>
-        <h1 class="text-center mt-3">Bienvenue <?= $_SESSION["user"]["email"] ?></h1>
+        <h1 class="text-center mt-3">Bienvenue <?= $_SESSION["user"]["pseudo"] ?> !</h1>
     </main>
 
     <footer class="mt-auto text-center p-5 mt-3">

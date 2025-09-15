@@ -30,6 +30,14 @@ class Annonce
      */
     public function createAnnonce(string $titre, string $description, float $prix, ?string $photo, int $userId)
     {
+        // Si la méthode utilisée pour envoyer des données depuis le formulaire de création de compte est POST, alors on récupère les informations que l'utilisateur à entrées
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $titre = htmlspecialchars($_POST['titre']); // Protection contre les injections XSS
+            $description = htmlspecialchars($_POST['description']);
+            $prix = htmlspecialchars($_POST['prix']);
+            $photo = htmlspecialchars($_FILES['photo']);
+            // $id = htmlspecialchars($_POST['id']);
+        }
 
         // On essaye de se connnecter
         try {
@@ -64,7 +72,6 @@ class Annonce
             $errors["peutPasCreerAnnonce"] = "L'annonce n'a pas été créée. " . $errorPDOException->getMessage();
             $peutCreerAnnonce = false;
             var_dump($errors);
-
         }
     }
 

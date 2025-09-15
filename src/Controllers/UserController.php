@@ -160,12 +160,15 @@ class UserController
             }
 
             if (empty($errors)) {
+                $user = new User();
                 $email = $_POST['email'];
-                $password = $_POST['password'];
+                $id = $user->findIdByMail($email)[0]["u_id"];
+                $pseudo = $user->findByUsernameById($id)[0]["u_username"];
 
                 $_SESSION["user"] = [
-                    "email" => $email,
-                    "password" => $password
+                    "id" => $id,
+                    "pseudo" => $pseudo,
+                    "email" => $email
                 ];
 
                 // var_dump($errors);

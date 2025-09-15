@@ -154,6 +154,102 @@ class User
     }
 
     /**
+     * Méthode pour trouver un nom d'utilisateur en fonction de son id
+     * @param int $id l'id de l'utilisateur à trouver
+     * @return array Retourne un tableau associatif avec toutes les informations sur le nom de l'utilisateur.
+     */
+    public function findByUsernameById(int $id)
+    {
+
+        // On essaye de se connnecter
+        try {
+
+            // On fait la requête SQL pour rechercher l'adresse mail de l'utilisateur en question.
+            $sql = "SELECT u_username FROM users WHERE u_id = '$id';";
+
+            // On se connecte à la base de données.
+            $pdo = Database::getConnection();
+
+            // On prépare la requête pour l'utiliser.
+            $stmt = $pdo->prepare($sql);
+
+            // On exécute la requête SQL.
+            $stmt->execute();
+
+            // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // On regarde s'il n'y a pas de données.
+            // Si c'est vide alors l'adresse mail n'a pas été trouvée.
+            if (empty($data)) {
+                $errors["idVide"] = "L'id $id n'a pas été trouvé.";
+
+                // Sinon, l'adresse mail est trouvée.
+            } else {
+                $errors["idTrouve"] = "L'id $id a été trouvé.";
+            }
+
+            // var_dump($errors);
+
+            // On retourne les données sous forme d'array (Tableau associatif).
+            return $data;
+        }
+
+        // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que cette adresse mail n'a pas été trouvée dans la base de données.
+        catch (PDOException $errorPDOException) {
+            $errors["idVide"] = "L'id $id n'a pas été trouvée.";
+        }
+    }
+
+    /**
+     * Méthode pour trouver un utilisateur en fonction de l'email
+     * @param string $id L'id de l'utilisateur à trouver
+     * @return array Retourne un tableau associatif avec toutes les informations sur l'email de l'utilisateur en fonction de son id.
+     */
+    public function findIdByMail(string $email)
+    {
+
+        // On essaye de se connnecter
+        try {
+
+            // On fait la requête SQL pour rechercher l'identifiant de l'utilisateur en question.
+            $sql = "SELECT u_id FROM users WHERE u_email = '$email';";
+
+            // On se connecte à la base de données.
+            $pdo = Database::getConnection();
+
+            // On prépare la requête pour l'utiliser.
+            $stmt = $pdo->prepare($sql);
+
+            // On exécute la requête SQL.
+            $stmt->execute();
+
+            // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // On regarder s'il n'y a pas de données.
+            // Si c'est vide, alors l'id n'a pas été trouvé.
+            if (empty($data)) {
+                $errors["idVide"] = "L'identifiant " . $data[0]["u_id"] . " n'est pas trouvé.";
+
+                // Sinon, l'id a bien été trouvé.
+            } else {
+                $errors["idTrouve"] = "Identifiant " . $data[0]["u_id"] . " trouvé.";
+            }
+
+            // var_dump($errors);
+
+            // Les données retournées sous forme de tableau associatif.
+            return $data;
+        }
+
+        // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que cet id n'a pas été trouvé dans la base de données.
+        catch (PDOException $errorPDOException) {
+            $errors["idVide"] = "L'identifiant " . $data[0]["u_id"] . " n'est pas trouvé.";
+        }
+    }
+
+    /**
      * Méthode pour trouver un utilisateur en fonction de l'email
      * @param string $id L'id de l'utilisateur à trouver
      * @return array Retourne un tableau associatif avec toutes les informations sur l'email de l'utilisateur en fonction de son id.

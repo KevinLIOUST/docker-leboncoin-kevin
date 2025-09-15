@@ -49,7 +49,7 @@
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
                 <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le
-                    profil de <?= $_SESSION["user"]["email"] ?></a>
+                    profil de <?= $_SESSION["user"]["pseudo"] ?></a>
             </div>
         <?php } ?>
     </header>
