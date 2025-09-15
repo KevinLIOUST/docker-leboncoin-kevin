@@ -23,26 +23,32 @@
             <a href="index.php?url=home"><img src="assets/img/Logo_Site_2.png" alt="assets/img/Logo_Site_2.png"></a>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=register">Créer un compte</a>
+            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=register">Créer
+                un compte</a>
         </div>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
-                <a class="liens-design" href="index.php?url=logout">Se déconnecter</a>
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=logout">Se
+                    déconnecter</a>
             </div>
         <?php } else { ?>
             <div class="d-flex justify-content-center align-items-center">
-                <a class="liens-design" href="index.php?url=login">Se connecter</a>
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=login">Se
+                    connecter</a>
             </div>
         <?php } ?>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=annonces">Voir les annonces disponibles</a>
+            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=annonces">Voir
+                les annonces disponibles</a>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=create">Créer une annonce</a>
+            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
+                une annonce</a>
         </div>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
-                <a class="liens-design" href="index.php?url=profil">Voir le profil de <?= $_SESSION["user"]["email"] ?></a>
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le
+                    profil de <?= $_SESSION["user"]["email"] ?></a>
             </div>
         <?php } ?>
     </header>
@@ -54,20 +60,25 @@
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="text-left" for="email">Adresse Email <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['email']) ? $errors['email'] : '' ?></span></label>
+                            <label class="text-left" for="email">Adresse Email <span class="text-danger">*</span><span
+                                    class="text-danger"><?= isset($errors['email']) ? $errors['email'] : '' ?></span></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="email" type="text" name="email" placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
+                            <input class="mt-1 taille-input design-input" id="email" type="text" name="email"
+                                placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="mt-3 text-left" for="password">Mot de passe <span class="text-danger">*</span><span class="text-danger"><?= isset($errors['password']) ? $errors['password'] : '' ?></span></label>
+                            <label class="mt-3 text-left" for="password">Mot de passe <span
+                                    class="text-danger">*</span><span
+                                    class="text-danger"><?= isset($errors['password']) ? $errors['password'] : '' ?></span></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="password" type="password" name="password" placeholder="mot de passe" value="<?= $_POST['password'] ?? '' ?>">
+                            <input class="mt-1 taille-input design-input" id="password" type="password" name="password"
+                                placeholder="mot de passe" value="<?= $_POST['password'] ?? '' ?>">
                         </div>
                     </div>
                 </div>

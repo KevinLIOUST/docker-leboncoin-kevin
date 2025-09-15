@@ -28,8 +28,9 @@ class Annonce
      * @param int $userId L'identifiant de l'utilisateur en question qui a fait l'annonce.
      * @return bool Retourne une valeur booléenne pour dire si l'utilisateur peut crée cette annonce ou pas.
      */
-    public function createAnnonce(string $titre, string $description, float $prix, ?string $photo, int $userId) {
-        
+    public function createAnnonce(string $titre, string $description, float $prix, ?string $photo, int $userId)
+    {
+
         // On essaye de se connnecter
         try {
 
@@ -44,7 +45,7 @@ class Annonce
 
             // On exécute la requête SQL.
             $stmt->execute();
-            
+
             // Variable booléenne $peutCreerAnnonce pour valeur true pour dire que l'annonce a été créée.
             $peutCreerAnnonce = true;
 
@@ -61,6 +62,7 @@ class Annonce
         // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que l'annonce n'a pas été crée et qu'elle n'a pas été ajouté dans la base de données.
         catch (PDOException $errorPDOException) {
             $errors["peutPasCreerAnnonce"] = "L'annonce n'a pas été créée. " . $errorPDOException->getMessage();
+            $peutCreerAnnonce = false;
             var_dump($errors);
 
         }
@@ -70,7 +72,8 @@ class Annonce
      * Méthode pour récupérer toutes les annonces.
      * @return array Retourne la liste des annonces sous forme de tableau associatif.
      */
-    public function findAll(){
+    public function findAll()
+    {
 
         // On essaye de se connnecter
         try {
@@ -89,7 +92,7 @@ class Annonce
 
             // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+
             // On regarde s'il n'y a pas de données.
             // Si c'est vide alors aucune annonce n'a été trouvée.
             if (empty($data)) {
@@ -119,7 +122,8 @@ class Annonce
      * Méthode pour récupérer l'annonce en question grâce à son id.
      * @return array Retourne l'annonce avec toutes ses informations sous forme de tableau associatif.
      */
-    public function findById(int $id){
+    public function findById(int $id)
+    {
 
         // On essaye de se connnecter
         try {
@@ -138,7 +142,7 @@ class Annonce
 
             // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+
             // On regarde s'il n'y a pas de données.
             // Si c'est vide alors l'annonce n'a pas été trouvée
             if (empty($data)) {
@@ -169,7 +173,8 @@ class Annonce
      * @param int $userId L'identifiant de l'utilisateur qui a posté une ou les annonces.
      * @return array Retourne un tableau associatif avec une ou les annonces avec l'identifiant de l'utilisateur en question.
      */
-    public function findByUser(int $userId) {
+    public function findByUser(int $userId)
+    {
 
         // On essaye de se connnecter
         try {
@@ -188,7 +193,7 @@ class Annonce
 
             // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+
             // On regarde s'il n'y a pas de données.
             // Si c'est vide alors les annonces n'ont pas été trouvées.
             if (empty($data)) {

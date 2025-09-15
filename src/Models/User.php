@@ -60,11 +60,49 @@ class User
 
         // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que l'utilisateur n'a pas été crée et donc n'a pas été ajouté à la base de données.
         catch (PDOException $errorPDOException) {
-            $errors["peutPasCreerUtil"] =  "La requête n'a pas pu être exécutée. Une adresse mail et un pseudo similaires sont déjà présents dans la base de données.";
+            $errors["peutPasCreerUtil"] = "La requête n'a pas pu être exécutée. Une adresse mail et un pseudo similaires sont déjà présents dans la base de données.";
             $peutCreerUtil = false;
             // var_dump($errors);
             return $peutCreerUtil;
         }
+    }
+
+    /**
+     * Méthode pour vérifier le mot de passe de l'utilisateur qui se connecte en question
+     * @param string $email L'email de l'utilisateur en question qui se connecte
+     * @return array Le Tableau Associatif avec le hachage du mot de passe
+     */
+    public static function checkPasswordHachByEmail(string $email)
+    {
+        // On fait la requête SQL pour créer un utilisateur.
+        $sql = "SELECT u_password FROM users WHERE u_email = '$email';";
+
+        // On se connecte à la base de données.
+        $pdo = Database::getConnection();
+
+        // On prépare la requête pour l'utiliser.
+        $stmt = $pdo->prepare($sql);
+
+        // On exécute la requête SQL.
+        $stmt->execute();
+
+        // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // On regarde s'il n'y a pas de données.
+        // Si c'est vide alors l'adresse mail n'a pas été trouvée.
+        if (empty($data)) {
+            $errors["pasBonHach"] = "Le mot de passe haché a été trouvé.";
+
+            // Sinon, l'adresse mail est trouvée.
+        } else {
+            $errors["bonHach"] = "Le mot de passe haché n'a pas été trouvé.";
+        }
+
+        // var_dump($errors);
+
+        // On retourne les données sous forme d'array (Tableau associatif).
+        return $data;
     }
 
     /**

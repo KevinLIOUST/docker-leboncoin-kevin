@@ -15,7 +15,8 @@ header {
 }
 
 .liens-design {
-  width: auto;
+  width: 12rem;
+  height: 6rem;
   text-decoration: none;
   background-color: #45f0df;
   color: black;

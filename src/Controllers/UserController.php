@@ -152,7 +152,7 @@ class UserController
                 if (empty($_POST['password'])) {
                     // je crée une erreur dans mon tableau
                     $errors['password'] = 'Mot de passe obligatoire';
-                } elseif (password_verify($_POST['password'], '$2y$10$cX6hw8zIYTqqtRNrthVKXuPAjPFZpa11BFEXlKw2CjR8w.3Kpz1Em')) {
+                } elseif (password_verify($_POST['password'], User::checkPasswordHachByEmail($_POST["email"])[0]["u_password"])) {
                     $reussi['password'] = "Mot de passe correct";
                 } else {
                     $errors['password'] = "Mot de passe incorrect";
@@ -168,19 +168,14 @@ class UserController
                     "password" => $password
                 ];
 
-                var_dump($errors);
-                var_dump($_SESSION);
+                // var_dump($errors);
+                // var_dump($_SESSION);
 
-                $this->welcome();
+                header("Location: index.php?url=welcome");
             }
         }
         // Test : FairyTail792
         require_once __DIR__ . "/../Views/login.php";
-    }
-
-    public function welcome()
-    {
-        include_once __DIR__ . "/../Views/welcome.php";
     }
 
     // Méthode pour pouvoir se déconnecter.

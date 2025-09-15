@@ -16,38 +16,44 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
+<body class="d-flex flex-column vh-100">
     <header class="border text-center p-3">
         <div class="d-flex justify-content-center align-items-center">
             <a href="index.php?url=home"><img src="assets/img/Logo_Site_2.png" alt="assets/img/Logo_Site_2.png"></a>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=register">Créer un compte</a>
+            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=register">Créer
+                un compte</a>
         </div>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
-                <a class="liens-design" href="index.php?url=logout">Se déconnecter</a>
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=logout">Se
+                    déconnecter</a>
             </div>
         <?php } else { ?>
             <div class="d-flex justify-content-center align-items-center">
-                <a class="liens-design" href="index.php?url=login">Se connecter</a>
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=login">Se
+                    connecter</a>
             </div>
         <?php } ?>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=annonces">Voir les annonces disponibles</a>
+            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=annonces">Voir
+                les annonces disponibles</a>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=create">Créer une annonce</a>
+            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
+                une annonce</a>
         </div>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
-                <a class="liens-design" href="index.php?url=profil">Voir le profil de <?= $_SESSION["user"]["email"] ?></a>
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le
+                    profil de <?= $_SESSION["user"]["email"] ?></a>
             </div>
         <?php } ?>
     </header>
 
     <main>
-        <h1 class="text-center">Bienvenue <?= $_SESSION["user"]["email"] ?></h1>
+        <h1 class="text-center mt-3">Bienvenue <?= $_SESSION["user"]["email"] ?></h1>
     </main>
 
     <footer class="mt-auto text-center p-5 mt-3">

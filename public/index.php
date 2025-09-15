@@ -13,6 +13,9 @@ require_once __DIR__ . "/routeur.php";
 // $objUser = new User();
 // $objUser->createUser("dddd","dddd.ooooo.com","ConventionsGeeks");
 
+// $hachage = User::checkPasswordHachByEmail("lucy.heartfilia@fairytail.com")[0]["u_password"];
+// var_dump($hachage);
+
 // $objUser->findByUser(19);
 
 ?>

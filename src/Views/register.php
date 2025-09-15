@@ -23,26 +23,32 @@
             <a href="index.php?url=home"><img src="assets/img/Logo_Site_2.png" alt="assets/img/Logo_Site_2.png"></a>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=register">Créer un compte</a>
+            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=register">Créer
+                un compte</a>
         </div>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
-                <a class="liens-design" href="index.php?url=logout">Se déconnecter</a>
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=logout">Se
+                    déconnecter</a>
             </div>
         <?php } else { ?>
             <div class="d-flex justify-content-center align-items-center">
-                <a class="liens-design" href="index.php?url=login">Se connecter</a>
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=login">Se
+                    connecter</a>
             </div>
         <?php } ?>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=annonces">Voir les annonces disponibles</a>
+            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=annonces">Voir
+                les annonces disponibles</a>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <a class="liens-design" href="index.php?url=create">Créer une annonce</a>
+            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
+                une annonce</a>
         </div>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
-                <a class="liens-design" href="index.php?url=profil">Voir le profil de <?= $_SESSION["user"][0] ?></a>
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le
+                    profil de <?= $_SESSION["user"]["email"] ?></a>
             </div>
         <?php } ?>
     </header>
@@ -54,7 +60,8 @@
                 <div class="d-flex justify-content-center mb-3">
                     <div>
                         <div>
-                            <label class="text-left" for="username">Choisir un pseudo (nom d'utilisateur) <span class="text-danger">*</span>
+                            <label class="text-left" for="username">Choisir un pseudo (nom d'utilisateur) <span
+                                    class="text-danger">*</span>
                                 <?php if (isset($errors['username'])) { ?>
                                     <span class="text-danger"><?= $errors['username'] ?></span>
                                 <?php } else { ?>
@@ -64,7 +71,8 @@
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="username" type="text" name="username" placeholder="username" value="<?= $_POST['username'] ?? '' ?>">
+                            <input class="mt-1 taille-input design-input" id="username" type="text" name="username"
+                                placeholder="username" value="<?= $_POST['username'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
@@ -81,7 +89,8 @@
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="email" type="text" name="email" placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
+                            <input class="mt-1 taille-input design-input" id="email" type="text" name="email"
+                                placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
@@ -98,14 +107,16 @@
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="password" type="password" name="password" placeholder="mot de passe" value="<?= $_POST['password'] ?? '' ?>">
+                            <input class="mt-1 taille-input design-input" id="password" type="password" name="password"
+                                placeholder="mot de passe" value="<?= $_POST['password'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="mt-3 text-left" for="confirmPassword">Confirmer le mot de passe <span class="text-danger">*</span>
+                            <label class="mt-3 text-left" for="confirmPassword">Confirmer le mot de passe <span
+                                    class="text-danger">*</span>
                                 <?php if (isset($errors['confirmPassword'])) { ?>
                                     <span class="text-danger"><?= $errors['confirmPassword'] ?></span>
                                 <?php } else { ?>
@@ -115,14 +126,17 @@
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="confirmPassword" type="password" name="confirmPassword" placeholder="mot de passe" value="<?= $_POST['confirmPassword'] ?? '' ?>">
+                            <input class="mt-1 taille-input design-input" id="confirmPassword" type="password"
+                                name="confirmPassword" placeholder="mot de passe"
+                                value="<?= $_POST['confirmPassword'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="mt-3 text-left" for="cgu">J'accepte les conditions générales d'utilisation <span class="text-danger">*</span>
+                            <label class="mt-3 text-left" for="cgu">J'accepte les conditions générales d'utilisation
+                                <span class="text-danger">*</span>
                                 <?php if (isset($errors['cgu'])) { ?>
                                     <span class="text-danger"><?= $errors['cgu'] ?></span>
                                 <?php } else { ?>
@@ -130,7 +144,8 @@
                                         <span class="text-success"><?= $reussi['cgu'] ?></span>
                                     <?php } ?>
                                 <?php } ?></label>
-                            <input class="mt-1" id="cgu" type="checkbox" name="cgu" placeholder="mot de passe" value="<?= $_POST['cgu'] ?? '' ?>">
+                            <input class="mt-1" id="cgu" type="checkbox" name="cgu" placeholder="mot de passe"
+                                value="<?= $_POST['cgu'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
