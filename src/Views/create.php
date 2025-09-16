@@ -1,4 +1,6 @@
 <?php
+// var_dump($_POST);
+// var_dump($_FILES);
 if (!isset($_SESSION["user"])) {
     header("Location: index.php?url=login");
 }
@@ -120,19 +122,18 @@ if (!isset($_SESSION["user"])) {
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="mt-3 text-left" for="photo">Photo <span class="text-danger">*</span>
-                                <?php if (isset($errors['photo'])) { ?>
-                                    <span class="text-danger"><?= $errors['photo'] ?></span>
+                            <label class="mt-3 text-left" for="file">file <span class="text-danger">*</span>
+                                <?php if (isset($errors['file'])) { ?>
+                                    <span class="text-danger"><?= $errors['file'] ?></span>
                                 <?php } else { ?>
-                                    <?php if (isset($reussi["photo"])) { ?>
-                                        <span class="text-success"><?= $reussi['photo'] ?></span>
+                                    <?php if (isset($reussi["file"])) { ?>
+                                        <span class="text-success"><?= $reussi['file'] ?></span>
                                     <?php } ?>
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="photo" type="file" name="photo"
-                                placeholder="mot de passe" enctype="multipart/form-data"
-                                value="<?= $_POST['photo'] ?? '' ?>">
+                            <input class="mt-1 taille-input design-input" id="file" type="file" name="file"
+                                enctype="multipart/form-data">
                         </div>
                     </div>
                 </div>
@@ -140,8 +141,8 @@ if (!isset($_SESSION["user"])) {
                     <input type="submit" class="btn btn-connexion" value="Créer une annonce">
                 </div>
                 <div class="d-flex justify-content-center mt-4">
-                    <?php if (isset($reussi['createUser'])) { ?>
-                        <p class="text-success"><b><?= $reussi['createUser'] ?></b></p>
+                    <?php if (isset($reussi["createAnnonce"])) { ?>
+                        <p class="text-success"><b><?= $reussi["createAnnonce"] ?></b></p>
                     <?php } ?>
                 </div>
             </form>

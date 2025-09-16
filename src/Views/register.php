@@ -150,7 +150,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
-                    <input type="submit" class="btn btn-connexion" value="Se connecter">
+                    <input type="submit" class="btn btn-connexion" value="Créer un compte">
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     <?php if (isset($reussi['createUser'])) { ?>

@@ -11,7 +11,7 @@ class AnnonceController
         require_once __DIR__ . "/../Views/annonces.php";
     }
 
-    public function create()
+    public function create(string $photo)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -57,38 +57,73 @@ class AnnonceController
 
             // On regarde pour la confirmation du mot de passe.
             // Il faut retaper encore une fois le mot de passe pour bien être sur que c'est bien ce mot de passe que l'utilisateur a choisi pour la création de son compte.
-            if (isset($_FILES["photo"])) {
+            if (isset($_POST["file"])) {
                 // on va vérifier si c'est vide
-                if (empty($_FILES["photo"])) {
+                if (empty($_POST["file"])) {
                     // si c'est vide, je créé une erreur dans mon tableau
-                    $errors["photo"] = "Photo obligatoire.";
+                    $errors["file"] = "Photo obligatoire.";
                 } else {
-                    $reussi["photo"] = "La Photo est présente.";
+                    $reussi["file"] = "La Photo est présente.";
                 }
             }
 
             if (empty($errors)) {
                 $annonce = new Annonce();
 
-                var_dump($_FILES['photo']);
+                // var_dump($_FILES['file']);
 
-                if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
-                    $nomFichier = $_FILES['photo']['name'];
-                    $cheminTemporaire = $_FILES['photo']['image/png'];
-                    $cheminDestination = __DIR__ . "/../../public/uploads/768x768/" . $nomFichier;
+                // if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+                //     $nomFichier = $_FILES['file'][$_POST['file']];
+                //     $cheminTemporaire = $_FILES['file']['image/png'];
+                //     $cheminDestination = __DIR__ . "/../../public/uploads/768x768/" . $nomFichier;
 
-                    // Déplacer le fichier vers le dossier final
-                    if (move_uploaded_file($cheminTemporaire, $cheminDestination)) {
-                        echo "Fichier téléchargé avec succès : $nomFichier";
+                //     // Déplacer le fichier vers le dossier final
+                //     if (move_uploaded_file($cheminTemporaire, $cheminDestination)) {
+                //         echo "Fichier téléchargé avec succès : $nomFichier";
+                //     } else {
+                //         echo "Erreur lors du déplacement du fichier.";
+                //     }
+                // } else {
+                //     echo "Erreur lors du téléchargement.";
+                // }
+
+                $chemin = __DIR__ . "/../../public/uploads/768x768";
+
+                // Vérifie si le dossier existe déjà
+                if (!file_exists($chemin)) {
+                    // Crée le dossier avec des permissions spécifiques
+                    if (mkdir($chemin, 0777)) {
+                        echo "Le dossier '$chemin' a été créé avec succès.";
                     } else {
-                        echo "Erreur lors du déplacement du fichier.";
+                        echo "Erreur lors de la création du dossier.";
                     }
                 } else {
-                    echo "Erreur lors du téléchargement : " . $_FILES['photo']['error'];
+                    echo "Le dossier '$chemin' existe déjà.";
                 }
 
-                $annonce->createAnnonce($_POST['titre'], $_POST['description'], $_POST['prix'], $_POST['photo'], $_SESSION['id']);
-                // $user->createUser($_POST['username'], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT));
+                // var_dump($_POST);
+
+                $_FILES["file"] = $photo;
+
+                // Vérifiez si un fichier a été uploadé
+                if (!isset($_FILES['file'])) {
+
+                    // Récupérer les informations du fichier
+                    $fileName = $_FILES['file']['name']; // Nom du fichier
+
+                    // Définir le dossier de destination
+                    $uploadFolder = __DIR__ . "/../../public/uploads/768x768/";
+                    $destinationPath = "$uploadFolder . $fileName";
+
+                    // Déplacer le fichier vers le dossier de destination
+                    // if (move_uploaded_file($fileTmpPath, $destinationPath)) {
+                    //     echo "Le fichier a été déplacé avec succès vers : $destinationPath";
+                    // } else {
+                    //     echo "Erreur : Impossible de déplacer le fichier.";
+                    // }
+                }
+
+                $annonce->createAnnonce($_POST['titre'], $_POST['description'], $_POST['prix'], $destinationPath, $_SESSION["user"]['id']);
                 $reussi["createAnnonce"] = "Une nouvelle annonce vient d'être créée.";
             }
         }

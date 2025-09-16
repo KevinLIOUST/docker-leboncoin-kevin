@@ -28,14 +28,14 @@ class Annonce
      * @param int $userId L'identifiant de l'utilisateur en question qui a fait l'annonce.
      * @return bool Retourne une valeur booléenne pour dire si l'utilisateur peut crée cette annonce ou pas.
      */
-    public function createAnnonce(string $titre, string $description, float $prix, ?string $photo, int $userId)
+    public function createAnnonce(string $titre, string $description, float $prix, string $photo, int $userId)
     {
         // Si la méthode utilisée pour envoyer des données depuis le formulaire de création de compte est POST, alors on récupère les informations que l'utilisateur à entrées
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $titre = htmlspecialchars($_POST['titre']); // Protection contre les injections XSS
             $description = htmlspecialchars($_POST['description']);
             $prix = htmlspecialchars($_POST['prix']);
-            $photo = htmlspecialchars($_FILES['photo']);
+            $photo = $_FILES['file'];
             // $id = htmlspecialchars($_POST['id']);
         }
 
@@ -60,7 +60,7 @@ class Annonce
             // Message avertissant l'utilisateur que l'utilisateur est crée et ajouté dans la base de données.
             $errors["peutCreerAnnonce"] = "L'annonce a été crée, et ajouté dans la base de données.";
 
-            var_dump($errors);
+            // var_dump($errors);
 
             // Retourne true.
             return $peutCreerAnnonce;
@@ -71,7 +71,7 @@ class Annonce
         catch (PDOException $errorPDOException) {
             $errors["peutPasCreerAnnonce"] = "L'annonce n'a pas été créée. " . $errorPDOException->getMessage();
             $peutCreerAnnonce = false;
-            var_dump($errors);
+            // var_dump($errors);
         }
     }
 
