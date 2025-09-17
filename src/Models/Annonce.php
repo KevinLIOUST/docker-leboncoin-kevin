@@ -35,7 +35,7 @@ class Annonce
             $titre = htmlspecialchars($_POST['titre']); // Protection contre les injections XSS
             $description = htmlspecialchars($_POST['description']);
             $prix = htmlspecialchars($_POST['prix']);
-            $photo = $_FILES['file'];
+            $photo = $_FILES['file']["name"];
             // $id = htmlspecialchars($_POST['id']);
         }
 
@@ -110,8 +110,8 @@ class Annonce
                 $errors["annoncesTrouvees"] = "Toutes les annonces ont été trouvées.";
             }
 
-            var_dump($errors);
-            var_dump($data);
+            // var_dump($errors);
+            // var_dump($data);
 
             // On retourne les annonces sous forme d'array (Tableau associatif).
             return $data;
@@ -121,7 +121,7 @@ class Annonce
         // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que les annonces ne sont pas trouvées.
         catch (PDOException $errorPDOException) {
             $errors["annoncesVide"] = "Pas d'annonces trouvées. " . $errorPDOException->getMessage();
-            var_dump($errors);
+            // var_dump($errors);
         }
     }
 
@@ -154,14 +154,17 @@ class Annonce
             // Si c'est vide alors l'annonce n'a pas été trouvée
             if (empty($data)) {
                 $errors["annonceIdVide"] = "L'annonce pour id $id n'a pas été trouvée.";
+                // echo "Annonce pas trouvée.";
+                header("Location: index.php?url=page404.php");
 
                 // Sinon, les annonces sont trouvées.
             } else {
                 $errors["annonceIdTrouvee"] = "L'annonce pour id $id a été trouvée.";
+                echo "Annonce trouvée.";
             }
 
-            var_dump($errors);
-            var_dump($data);
+            // var_dump($errors);
+            // var_dump($data);
 
             // On retourne les annonces sous forme d'array (Tableau associatif).
             return $data;
@@ -171,7 +174,7 @@ class Annonce
         // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que l'annonce en question n'est pas trouvée.
         catch (PDOException $errorPDOException) {
             $errors["annonceIdVide"] = "L'annonce pour id $id n'a pas été trouvée. " . $errorPDOException->getMessage();
-            var_dump($errors);
+            // var_dump($errors);
         }
     }
 
@@ -211,8 +214,8 @@ class Annonce
                 $errors["annoncesUtilIdTrouvee"] = "Les annonces pour l'utilisateur $userId ont été trouvées.";
             }
 
-            var_dump($errors);
-            var_dump($data);
+            // var_dump($errors);
+            // var_dump($data);
 
             // On retourne les annonces sous forme d'array (Tableau associatif).
             return $data;
@@ -222,7 +225,7 @@ class Annonce
         // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que les annonces pour utilisateur $userId n'ont pas été trouvées.
         catch (PDOException $errorPDOException) {
             $errors["annoncesUtilIdVide"] = "Les annonces pour l'utilisateur $userId n'ont pas été trouvées. " . $errorPDOException->getMessage();
-            var_dump($errors);
+            // var_dump($errors);
         }
     }
 }

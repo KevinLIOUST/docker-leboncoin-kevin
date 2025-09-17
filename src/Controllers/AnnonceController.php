@@ -8,10 +8,12 @@ class AnnonceController
 {
     public function index()
     {
+        $annonce = new Annonce();
+        $data = $annonce->findAll();
         require_once __DIR__ . "/../Views/annonces.php";
     }
 
-    public function create(string $photo)
+    public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -70,24 +72,7 @@ class AnnonceController
             if (empty($errors)) {
                 $annonce = new Annonce();
 
-                // var_dump($_FILES['file']);
-
-                // if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-                //     $nomFichier = $_FILES['file'][$_POST['file']];
-                //     $cheminTemporaire = $_FILES['file']['image/png'];
-                //     $cheminDestination = __DIR__ . "/../../public/uploads/768x768/" . $nomFichier;
-
-                //     // Déplacer le fichier vers le dossier final
-                //     if (move_uploaded_file($cheminTemporaire, $cheminDestination)) {
-                //         echo "Fichier téléchargé avec succès : $nomFichier";
-                //     } else {
-                //         echo "Erreur lors du déplacement du fichier.";
-                //     }
-                // } else {
-                //     echo "Erreur lors du téléchargement.";
-                // }
-
-                $chemin = __DIR__ . "/../../public/uploads/768x768";
+                $chemin = __DIR__ . "/../../public/uploads/" . $_SESSION["user"]["pseudo"];
 
                 // Vérifie si le dossier existe déjà
                 if (!file_exists($chemin)) {
@@ -101,29 +86,40 @@ class AnnonceController
                     echo "Le dossier '$chemin' existe déjà.";
                 }
 
-                // var_dump($_POST);
-
-                $_FILES["file"] = $photo;
-
                 // Vérifiez si un fichier a été uploadé
-                if (!isset($_FILES['file'])) {
+                if (!empty($_FILES['file']['name'])) {
 
                     // Récupérer les informations du fichier
-                    $fileName = $_FILES['file']['name']; // Nom du fichier
+
+                    $file = $_FILES['file'];
+                    $nomFichier = $file['name'];
+                    // $typeFichier = $file["type"];
+                    $tmpNameFichier = $file["tmp_name"];
+                    // var_dump($_FILES);
+
+                    // On vérifie si c'est une image
+                    if (getimagesize($tmpNameFichier)) {
+                        // $reussi["image"] = "C'est une image.";
+                        $reussi["image"] = "C'est une image.";
+                    } else {
+                        // $errors["pasImage"] = "C'est pas une image.";
+                        $errors["pasImage"] = "C'est pas une image.";
+                    }
+
 
                     // Définir le dossier de destination
-                    $uploadFolder = __DIR__ . "/../../public/uploads/768x768/";
-                    $destinationPath = "$uploadFolder . $fileName";
+                    $uploadFolder = __DIR__ . "/../../public/uploads/" . $_SESSION["user"]["pseudo"] . "/";
+                    $destinationPath = "$uploadFolder" . "$nomFichier";
 
                     // Déplacer le fichier vers le dossier de destination
-                    // if (move_uploaded_file($fileTmpPath, $destinationPath)) {
-                    //     echo "Le fichier a été déplacé avec succès vers : $destinationPath";
-                    // } else {
-                    //     echo "Erreur : Impossible de déplacer le fichier.";
-                    // }
+                    if (move_uploaded_file($tmpNameFichier, $destinationPath)) {
+                        echo "Le fichier a été déplacé avec succès vers : $destinationPath";
+                    } else {
+                        echo "Erreur : Impossible de déplacer le fichier.";
+                    }
                 }
 
-                $annonce->createAnnonce($_POST['titre'], $_POST['description'], $_POST['prix'], $destinationPath, $_SESSION["user"]['id']);
+                $annonce->createAnnonce($_POST['titre'], $_POST['description'], $_POST['prix'], $nomFichier, $_SESSION["user"]['id']);
                 $reussi["createAnnonce"] = "Une nouvelle annonce vient d'être créée.";
             }
         }
@@ -133,7 +129,19 @@ class AnnonceController
 
     public function show($id)
     {
-        require_once __DIR__ . "/../Views/details.php/$id";
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //     if (isset($_GET['url'])) {
+        //         // var_dump($data);
+        //     }
+        // }
+        $segments = explode('/', trim($_GET['url'], '/'));
+        // var_dump($segments);
+        $id = $segments[1];
+
+        $annonce = new Annonce();
+        $data = $annonce->findById($id);
+
+        require_once __DIR__ . "/../Views/details.php";
     }
 }
 ?>

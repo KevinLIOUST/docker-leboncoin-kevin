@@ -64,8 +64,8 @@
                                     class="text-danger"><?= isset($errors['email']) ? $errors['email'] : '' ?></span></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="email" type="text" name="email"
-                                placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
+                            <input class="mt-1 taille-input-connexion design-input-connexion" id="email" type="text"
+                                name="email" placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
@@ -77,8 +77,9 @@
                                     class="text-danger"><?= isset($errors['password']) ? $errors['password'] : '' ?></span></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="password" type="password" name="password"
-                                placeholder="mot de passe" value="<?= $_POST['password'] ?? '' ?>">
+                            <input class="mt-1 taille-input-connexion design-input-connexion" id="password"
+                                type="password" name="password" placeholder="mot de passe"
+                                value="<?= $_POST['password'] ?? '' ?>">
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@
 if (!isset($_SESSION["user"])) {
     header("Location: index.php?url=login");
 }
+// var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +64,7 @@ if (!isset($_SESSION["user"])) {
     <main>
         <h1 class="text-center mt-3 mb-3">Créer une annonce</h1>
         <div class="d-flex justify-content-center align-items-center">
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">
                 <div class="d-flex justify-content-center mb-3">
                     <div>
                         <div>
@@ -77,8 +78,9 @@ if (!isset($_SESSION["user"])) {
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="titre" type="text" name="titre"
-                                placeholder="titre de l'annonce" value="<?= $_POST['titre'] ?? '' ?>">
+                            <input class="mt-1 taille-input-create-annonce design-input-create-annonce" id="titre"
+                                type="text" name="titre" placeholder="titre de l'annonce"
+                                value="<?= $_POST['titre'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
@@ -95,9 +97,10 @@ if (!isset($_SESSION["user"])) {
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="description" type="text"
-                                name="description" placeholder="description de l'annonce"
-                                value="<?= $_POST['description'] ?? '' ?>">
+                            <textarea class="taille-input-create-annonce design-input-create-annonce-description"
+                                name="description" id="description" placeholder="description de l'annonce">
+                                <?= $_POST['description'] ?? '' ?>
+                            </textarea>
                         </div>
                     </div>
                 </div>
@@ -114,8 +117,9 @@ if (!isset($_SESSION["user"])) {
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="prix" type="number" name="prix"
-                                placeholder="Prix de l'article" value="<?= $_POST['prix'] ?? '' ?>">
+                            <input class="mt-1 taille-input-create-annonce design-input-create-annonce" id="prix"
+                                type="number" name="prix" placeholder="Prix de l'article"
+                                value="<?= $_POST['prix'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
@@ -132,8 +136,8 @@ if (!isset($_SESSION["user"])) {
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="file" type="file" name="file"
-                                enctype="multipart/form-data">
+                            <input class="mt-1 taille-input-create-annonce design-input-create-annonce" id="file"
+                                type="file" name="file">
                         </div>
                     </div>
                 </div>
