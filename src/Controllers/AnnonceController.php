@@ -59,9 +59,9 @@ class AnnonceController
 
             // On regarde pour la confirmation du mot de passe.
             // Il faut retaper encore une fois le mot de passe pour bien être sur que c'est bien ce mot de passe que l'utilisateur a choisi pour la création de son compte.
-            if (isset($_POST["file"])) {
+            if (isset($_FILES["file"])) {
                 // on va vérifier si c'est vide
-                if (empty($_POST["file"])) {
+                if (empty($_FILES["file"]["name"])) {
                     // si c'est vide, je créé une erreur dans mon tableau
                     $errors["file"] = "Photo obligatoire.";
                 } else {
@@ -69,10 +69,12 @@ class AnnonceController
                 }
             }
 
+            var_dump($_FILES);
+
             if (empty($errors)) {
                 $annonce = new Annonce();
 
-                $chemin = __DIR__ . "/../../public/uploads/" . $_SESSION["user"]["pseudo"];
+                $chemin = __DIR__ . "/../../public/uploads";
 
                 // Vérifie si le dossier existe déjà
                 if (!file_exists($chemin)) {
@@ -92,10 +94,12 @@ class AnnonceController
                     // Récupérer les informations du fichier
 
                     $file = $_FILES['file'];
-                    $nomFichier = $file['name'];
-                    // $typeFichier = $file["type"];
+
+                    // On génére un identifiant unique pour l'image en question.
+                    $imageId = md5(uniqid('image_', true));
+                    $type = $file['type'];
                     $tmpNameFichier = $file["tmp_name"];
-                    // var_dump($_FILES);
+                    var_dump($_FILES);
 
                     // On vérifie si c'est une image
                     if (getimagesize($tmpNameFichier)) {
@@ -108,8 +112,10 @@ class AnnonceController
 
 
                     // Définir le dossier de destination
-                    $uploadFolder = __DIR__ . "/../../public/uploads/" . $_SESSION["user"]["pseudo"] . "/";
-                    $destinationPath = "$uploadFolder" . "$nomFichier";
+                    $uploadFolder = __DIR__ . "/../../public/uploads/";
+                    $nomFichier = "$imageId" . "." . explode("/", $type)[1];
+                    var_dump($nomFichier);
+                    $destinationPath = "$uploadFolder" . $nomFichier;
 
                     // Déplacer le fichier vers le dossier de destination
                     if (move_uploaded_file($tmpNameFichier, $destinationPath)) {

@@ -35,8 +35,6 @@ class Annonce
             $titre = htmlspecialchars($_POST['titre']); // Protection contre les injections XSS
             $description = htmlspecialchars($_POST['description']);
             $prix = htmlspecialchars($_POST['prix']);
-            $photo = $_FILES['file']["name"];
-            // $id = htmlspecialchars($_POST['id']);
         }
 
         // On essaye de se connnecter

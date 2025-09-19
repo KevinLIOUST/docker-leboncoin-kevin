@@ -42,10 +42,12 @@
             <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=annonces">Voir
                 les annonces disponibles</a>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
-                une annonce</a>
-        </div>
+        <?php if (isset($_SESSION["user"])) { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
+                    une annonce</a>
+            </div>
+        <?php } ?>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
                 <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le

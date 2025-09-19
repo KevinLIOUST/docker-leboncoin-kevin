@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Annonce;
 use App\Models\DatabaseConnection\Database;
 use App\Models\User;
 
@@ -109,6 +110,8 @@ class UserController
      */
     public function profil()
     {
+        $annonce = new Annonce();
+        $data = $annonce->findByUser($_SESSION["user"]["id"]);
         require_once __DIR__ . "/../Views/profil.php";
     }
 
@@ -121,60 +124,65 @@ class UserController
         // On lance uniquement quand il y a un formulaire validé via la méthode SESSION
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            // On fait un tableau d'erreurs pour gérer les erreurs
-            $errors = [];
+            if (isset($_SESSION['user'])) {
+                unset($_SESSION["user"]);
+                session_destroy();
+            } else {
+                // On fait un tableau d'erreurs pour gérer les erreurs
+                $errors = [];
 
-            // On crée un tableau pour afficher les message pour dire à l'utilisateur que c'est bon pour telle ou telle action.
-            $reussi = [];
+                // On crée un tableau pour afficher les message pour dire à l'utilisateur que c'est bon pour telle ou telle action.
+                $reussi = [];
 
-            if (isset($_POST['email'])) {
-                // On va vérifier si c'est vide
-                if (empty($_POST['email'])) {
-                    // je crée une erreur dans mon tableau
-                    $errors['email'] = 'Mail obligatoire';
-                } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                    $errors['email'] = 'Mail non valide';
-                } elseif (User::checkMail($_POST['email'])) {
-                    $reussi['email'] = "Mail correct";
-                } else {
-                    $errors['email'] = "Mail incorrect";
+                if (isset($_POST['email'])) {
+                    // On va vérifier si c'est vide
+                    if (empty($_POST['email'])) {
+                        // je crée une erreur dans mon tableau
+                        $errors['email'] = 'Mail obligatoire';
+                    } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                        $errors['email'] = 'Mail non valide';
+                    } elseif (User::checkMail($_POST['email'])) {
+                        $reussi['email'] = "Mail correct";
+                    } else {
+                        $errors['email'] = "Mail incorrect";
+                    }
                 }
-            }
 
-            // Test avec Lucy Heartfilia
-            // lucy.heartfilia@fairytail.com
-            // '$2y$10$cX6hw8zIYTqqtRNrthVKXuPAjPFZpa11BFEXlKw2CjR8w.3Kpz1Em';
-            // FairyTail792
+                // Test avec Lucy Heartfilia
+                // lucy.heartfilia@fairytail.com
+                // '$2y$10$cX6hw8zIYTqqtRNrthVKXuPAjPFZpa11BFEXlKw2CjR8w.3Kpz1Em';
+                // FairyTail792
 
-            if (isset($_POST['password'])) {
-                $password = $_POST['password'];
-                // On va vérifier si c'est vide
-                if (empty($_POST['password'])) {
-                    // je crée une erreur dans mon tableau
-                    $errors['password'] = 'Mot de passe obligatoire';
-                } elseif (password_verify($_POST['password'], User::checkPasswordHachByEmail($_POST["email"])[0]["u_password"])) {
-                    $reussi['password'] = "Mot de passe correct";
-                } else {
-                    $errors['password'] = "Mot de passe incorrect";
+                if (isset($_POST['password'])) {
+                    $password = $_POST['password'];
+                    // On va vérifier si c'est vide
+                    if (empty($_POST['password'])) {
+                        // je crée une erreur dans mon tableau
+                        $errors['password'] = 'Mot de passe obligatoire';
+                    } elseif (password_verify($_POST['password'], User::checkPasswordHachByEmail($_POST["email"])[0]["u_password"])) {
+                        $reussi['password'] = "Mot de passe correct";
+                    } else {
+                        $errors['password'] = "Mot de passe incorrect";
+                    }
                 }
-            }
 
-            if (empty($errors)) {
-                $user = new User();
-                $email = $_POST['email'];
-                $id = $user->findIdByMail($email)[0]["u_id"];
-                $pseudo = $user->findByUsernameById($id)[0]["u_username"];
+                if (empty($errors)) {
+                    $user = new User();
+                    $email = $_POST['email'];
+                    $id = $user->findIdByMail($email)[0]["u_id"];
+                    $pseudo = $user->findByUsernameById($id)[0]["u_username"];
 
-                $_SESSION["user"] = [
-                    "id" => $id,
-                    "pseudo" => $pseudo,
-                    "email" => $email
-                ];
+                    $_SESSION["user"] = [
+                        "id" => $id,
+                        "pseudo" => $pseudo,
+                        "email" => $email
+                    ];
 
-                // var_dump($errors);
-                // var_dump($_SESSION);
+                    // var_dump($errors);
+                    // var_dump($_SESSION);
 
-                header("Location: index.php?url=welcome");
+                    header("Location: index.php?url=welcome");
+                }
             }
         }
         // Test : FairyTail792
@@ -184,8 +192,6 @@ class UserController
     // Méthode pour pouvoir se déconnecter.
     public function logout()
     {
-        unset($_SESSION["user"]);
-        session_destroy();
-        header('Location: index.php?url=login');
+        header('Location: index.php?url=logout');
     }
 }

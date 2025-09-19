@@ -44,6 +44,16 @@ header {
   border-color: 3px solid #4d5deb;
 }
 
+.taille-input-register {
+  width: 30rem;
+}
+
+.design-input-register {
+  border-radius: 8px;
+  height: 3rem;
+  border-color: 3px solid #4d5deb;
+}
+
 .design-input-create-annonce-description {
   border-radius: 8px;
   height: 10rem;
@@ -72,6 +82,22 @@ header {
   background-color: #6f8fec;
   color: white;
   width: 10rem;
+}
+
+.btn-deconnexion {
+  font-size: large;
+  border: 3px solid black;
+  background-color: #4d5deb;
+  color: white;
+  width: 30rem;
+}
+
+.btn-deconnexion:hover {
+  font-size: large;
+  border: 3px solid black;
+  background-color: #6f8fec;
+  color: white;
+  width: 30rem;
 }
 
 .btn-retour {
