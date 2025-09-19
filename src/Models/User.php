@@ -24,13 +24,6 @@ class User
      */
     public function createUser(string $pseudo, string $email, string $password)
     {
-        // Si la méthode utilisée pour envoyer des données depuis le formulaire de création de compte est POST, alors on récupère les informations que l'utilisateur à entrées
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $pseudo = htmlspecialchars($_POST['username']); // Protection contre les injections XSS
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe
-            $email = htmlspecialchars($_POST['email']);
-        }
-
         // On essaye de se connecter
         try {
 

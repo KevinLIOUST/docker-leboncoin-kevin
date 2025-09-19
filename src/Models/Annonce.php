@@ -30,13 +30,6 @@ class Annonce
      */
     public function createAnnonce(string $titre, string $description, float $prix, string $photo, int $userId)
     {
-        // Si la méthode utilisée pour envoyer des données depuis le formulaire de création de compte est POST, alors on récupère les informations que l'utilisateur à entrées
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $titre = htmlspecialchars($_POST['titre']); // Protection contre les injections XSS
-            $description = htmlspecialchars($_POST['description']);
-            $prix = htmlspecialchars($_POST['prix']);
-        }
-
         // On essaye de se connnecter
         try {
 
