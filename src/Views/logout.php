@@ -61,7 +61,7 @@
     <main>
         <h1 class="text-center mt-3">Vous avez été déconnecté avec succès !</h1>
         <div class="d-flex justify-content-center">
-            <form action="index.php?url=login" method="POST">
+            <form action="index.php?url=home" method="POST">
                 <button class="btn-deconnexion p-3 rounded-3">Retour à la page de connexion</button>
             </form>
         </div>
@@ -73,11 +73,9 @@
 
     <script>
         setTimeout(() => {
-            <?php
-            unset($_SESSION["user"]);
-            session_destroy();
-            ?>
-            window.location.href = "index.php?url=login";
+            <?php unset($_SESSION["user"]); ?>
+            <?php session_destroy(); ?>
+            window.location.href = "index.php?url=home";
         }, 3000);
     </script>
 </body>
