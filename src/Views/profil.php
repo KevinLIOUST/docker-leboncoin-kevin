@@ -75,11 +75,17 @@
                     <p class="mt-2 taille-champ-nom-article"><b>Nom : </b><br><?= $annonce["a_title"] ?></p>
                     <p class="mt-2"><b>Prix : </b><br><?= $annonce["a_price"] ?> €</p>
                     <p class="mt-2"><b>Publiée le : </b><br><?= $annonce["a_publication"] ?></p>
-                    <form class="d-flex justify-content-center taille-champ-form-annonces"
-                        action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
-                        <button class="d-flex align-items-center btn-voir-details p-3 mb-3 rounded-3" type="submit"
-                            name="id" id="id">Voir les détails</button>
-                    </form>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <form class="d-flex justify-content-center taille-champ-form-annonces"
+                            action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
+                            <button class="d-flex align-items-center btn-voir-details p-3 mb-3 rounded-3" type="submit"
+                                name="id" id="id">Voir les détails</button>
+                        </form>
+                        <form action="index.php?url=profil/<?= $annonce["a_id"] ?>" method="POST">
+                            <button class="d-flex align-items-center justify-content-center btn-supprime-annonce p-3 mb-3 rounded-3 ms-3 mx-3" type="submit"
+                                name="id" id="id">Supprimer</button>
+                        </form>
+                    </div>
                 </div>
             <?php } ?>
         </div>

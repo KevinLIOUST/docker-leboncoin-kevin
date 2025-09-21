@@ -5,6 +5,7 @@
 use App\Controllers\AnnonceController;
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
+use App\Models\Annonce;
 
 // si le param url est présent on prend sa valeur, sinon on donne la valeur home
 $url = $_GET['url'] ?? 'home';
@@ -49,6 +50,13 @@ switch ($page) {
     case "profil":
         $objController = new UserController();
         $objController->profil();
+
+        if ($id == null) {
+            break;
+        } else {
+            $objController = new AnnonceController();
+            $objController->supprimerAnnonce();
+        }
         break;
 
     // Page de déconnexion

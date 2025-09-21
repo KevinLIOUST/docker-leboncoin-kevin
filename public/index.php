@@ -30,3 +30,7 @@ require_once __DIR__ . "/routeur.php";
 // var_dump($hachage);
 
 // $objUser->findByUser(19);
+
+// $annonce = new Annonce();
+// $image = $annonce->findImage(21)[0]["a_picture"];
+// var_dump($image);

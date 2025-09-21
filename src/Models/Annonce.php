@@ -8,13 +8,7 @@ use PDOException;
 
 $errors = [];
 
-// Si la méthode utilisée pour envoyer des données depuis le formulaire de création de compte est POST, alors on récupère les informations que l'utilisateur à entrées
-
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $pseudo = htmlspecialchars($_POST['pseudo']); // Protection contre les injections XSS
-//     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe
-//     $email = htmlspecialchars($_POST['email']);
-// }
+$reussi = [];
 
 // Classe Annonce pour gérer les annonces avec la base de données
 class Annonce
@@ -49,7 +43,7 @@ class Annonce
             $peutCreerAnnonce = true;
 
             // Message avertissant l'utilisateur que l'utilisateur est crée et ajouté dans la base de données.
-            $errors["peutCreerAnnonce"] = "L'annonce a été crée, et ajouté dans la base de données.";
+            $reussi["peutCreerAnnonce"] = "L'annonce a été crée, et ajouté dans la base de données.";
 
             // var_dump($errors);
 
@@ -98,7 +92,7 @@ class Annonce
 
                 // Sinon, les annonces sont trouvées.
             } else {
-                $errors["annoncesTrouvees"] = "Toutes les annonces ont été trouvées.";
+                $reussi["annoncesTrouvees"] = "Toutes les annonces ont été trouvées.";
             }
 
             // var_dump($errors);
@@ -145,13 +139,11 @@ class Annonce
             // Si c'est vide alors l'annonce n'a pas été trouvée
             if (empty($data)) {
                 $errors["annonceIdVide"] = "L'annonce pour id $id n'a pas été trouvée.";
-                // echo "Annonce pas trouvée.";
                 header("Location: index.php?url=page404.php");
 
                 // Sinon, les annonces sont trouvées.
             } else {
-                $errors["annonceIdTrouvee"] = "L'annonce pour id $id a été trouvée.";
-                echo "Annonce trouvée.";
+                $reussi["annonceIdTrouvee"] = "L'annonce pour id $id a été trouvée.";
             }
 
             // var_dump($errors);
@@ -202,7 +194,7 @@ class Annonce
 
                 // Sinon, les annonces sont trouvées.
             } else {
-                $errors["annoncesUtilIdTrouvee"] = "Les annonces pour l'utilisateur $userId ont été trouvées.";
+                $reussi["annoncesUtilIdTrouvee"] = "Les annonces pour l'utilisateur $userId ont été trouvées.";
             }
 
             // var_dump($errors);
@@ -217,6 +209,97 @@ class Annonce
         catch (PDOException $errorPDOException) {
             $errors["annoncesUtilIdVide"] = "Les annonces pour l'utilisateur $userId n'ont pas été trouvées. " . $errorPDOException->getMessage();
             // var_dump($errors);
+        }
+    }
+
+    /**
+     * Méthode pour supprimer l'annonce enquestion sur laquelle l'utilisateur a cliqué.
+     * @param int $annonceId L'identifiant de l'annonce en question
+     */
+    public function deleteAnnonce(int $annonceId)
+    {
+
+        // On essaye de se connnecter
+        try {
+
+            // On fait la requête SQL pour récupérer l'annonce en question avec l'id.
+            $sql = "DELETE FROM annonces WHERE a_id = $annonceId;";
+
+            // On se connecte à la base de données.
+            $pdo = Database::getConnection();
+
+            // On prépare la requête pour l'utiliser.
+            $stmt = $pdo->prepare($sql);
+
+            // On exécute la requête SQL.
+            $stmt->execute();
+
+            if ($stmt->execute()) {
+                $reussi["supprimeAnnonce"] = "L'annonce $annonceId a bien été supprimée.";
+            } else {
+                $errors["pasSupprimeAnnonce"] = "L'annonce $annonceId n'a pas été supprimée.";
+            }
+
+        }
+
+        // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que les annonces pour utilisateur $annonceId n'ont pas été trouvées.
+        catch (PDOException $errorPDOException) {
+            $errors["pasSupprimeAnnonce"] = "L'annonce $annonceId n'a pas été supprimée." . $errorPDOException->getMessage();
+        }
+    }
+
+    /**
+     * Méthode pour retrouver l'image en question à supprimer en même temps que l'annonce.
+     * @param int $annonceId L'identifiant de l'annonce en question
+     */
+    public function findImage(int $annonceId)
+    {
+
+        // On essaye de se connnecter
+        try {
+
+            // On fait la requête SQL pour récupérer l'image en question avec l'id de l'annonce.
+            $sql = "SELECT a_picture FROM annonces WHERE a_id = $annonceId;";
+
+            // On se connecte à la base de données.
+            $pdo = Database::getConnection();
+
+            // On prépare la requête pour l'utiliser.
+            $stmt = $pdo->prepare($sql);
+
+            // On exécute la requête SQL.
+            $stmt->execute();
+
+            if ($stmt->execute()) {
+                $reussi["trouverImage"] = "L'image a bien été trouvée.";
+            } else {
+                $errors["pasTrouverImage"] = "L'image n'a pas été trouvée.";
+            }
+
+            // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // On regarde s'il n'y a pas de données.
+            // Si c'est vide alors les annonces n'ont pas été trouvées.
+            if (empty($data)) {
+                $errors["pasTrouverImage"] = "L'image n'a pas été trouvée.";
+
+                // Sinon, les annonces sont trouvées.
+            } else {
+                $reussi["trouverImage"] = "L'image a bien été trouvée.";
+            }
+
+            // var_dump($errors);
+            // var_dump($data);
+
+            // On retourne les annonces sous forme d'array (Tableau associatif).
+            return $data;
+
+        }
+
+        // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que les annonces pour utilisateur $annonceId n'ont pas été trouvées.
+        catch (PDOException $errorPDOException) {
+            $errors["pasTrouverImage"] = "L'image n'a pas été trouvée." . $errorPDOException->getMessage();
         }
     }
 }
