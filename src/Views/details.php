@@ -63,8 +63,8 @@
                         <img src="/uploads/<?= $annonce["a_picture"] ?>"
                             alt="../../public/uploads/<?= $annonce["a_picture"] ?>">
                     </div>
-                    <p class="mt-2"><b>Nom : </b><br><?= $annonce["a_title"] ?></p>
-                    <p class="mt-2"><b>Description : </b><br><?= $annonce["a_description"] ?></p>
+                    <p class="mt-2"><b>Nom : </b><br><?= htmlspecialchars($annonce["a_title"]) ?></p>
+                    <p class="mt-2"><b>Description : </b><br><?= htmlspecialchars($annonce["a_description"]) ?></p>
                     <p class="mt-2"><b>Prix : </b><br><?= $annonce["a_price"] ?> €</p>
                     <p class="mt-2"><b>Publiée le : </b><br><?= $annonce["a_publication"] ?></p>
                     <div class="d-flex justify-content-center">

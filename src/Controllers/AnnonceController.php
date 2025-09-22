@@ -21,16 +21,17 @@ class AnnonceController
 
     public function supprimerAnnonce()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            if (isset($_GET["url"])) {
-                $id = explode('/', $_GET['url'])[1] ?? null;
-            }
+        if (isset($_GET["url"])) {
+            $id = explode('/', $_GET['url'])[1] ?? null;
+        }
 
-            $annonce = new Annonce();
+        $annonce = new Annonce();
+
+        if ($annonce->findById($id)[0]["u_id"] == $_SESSION["user"]["id"]) {
             $image = $annonce->findImage($id)[0]["a_picture"];
             $annonce->deleteAnnonce($id, $_SESSION["user"]["id"]);
-
             // Chemin vers l'image à supprimer
             $chemin = __DIR__ . "/../../public/uploads/$image";
 
@@ -46,6 +47,7 @@ class AnnonceController
                 $errors["pasImage"] = "Erreur : Le fichier n'existe pas.";
             }
         }
+        // }
 
         include_once __DIR__ . "/../Views/profil.php";
         echo '<script>window.location.href = "index.php?url=profil";</script>';
@@ -68,6 +70,8 @@ class AnnonceController
                 if (empty($_POST["titre"])) {
                     // si c'est vide, je créé une erreur dans mon tableau
                     $errors["titre"] = "Titre obligatoire.";
+                } elseif (strlen($_POST["titre"]) > 100) {
+                    $errors["titre"] = "Titre trop long";
                 } else {
                     $reussi["titre"] = "Titre valide.";
                 }

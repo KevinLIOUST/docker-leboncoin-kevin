@@ -97,9 +97,8 @@
                         </div>
                         <div class="text-center">
                             <textarea class="taille-input-create-annonce design-input-create-annonce-description"
-                                name="description" id="description" placeholder="description de l'annonce">
-                                <?= $_POST['description'] ?? '' ?>
-                            </textarea>
+                                name="description" id="description"
+                                placeholder="description de l'annonce"><?= $_POST['description'] ?? "" ?></textarea>
                         </div>
                     </div>
                 </div>
