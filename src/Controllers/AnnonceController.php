@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Annonce;
+use BcMath\Number;
 
 // On crée un tableau vide pour les erreurs.
 $errors = [];
@@ -83,6 +84,8 @@ class AnnonceController
                 if (empty($_POST["description"])) {
                     // si c'est vide, je créé une erreur dans mon tableau
                     $errors["description"] = "Description obligatoire.";
+                } elseif (strlen($_POST["description"]) > 500) {
+                    $errors["description"] = "description trop longue.";
                 } else {
                     $reussi["description"] = "Description valide";
                 }
@@ -94,6 +97,10 @@ class AnnonceController
                 if (empty($_POST["prix"])) {
                     // si c'est vide, je créé une erreur dans mon tableau
                     $errors["prix"] = "Prix obligatoire.";
+                } elseif ((int) $_POST["prix"] < 0) {
+                    $errors["prix"] = "Le prix doit être à 0 ou plus.";
+                } elseif ($_POST["prix"] == 0) {
+                    $reussi["prix"] = "Cette annonce est gratuite.";
                 } else {
                     $reussi["prix"] = "Prix valide.";
                 }
@@ -122,12 +129,12 @@ class AnnonceController
                 if (!file_exists($chemin)) {
                     // Crée le dossier avec des permissions spécifiques
                     if (mkdir($chemin, 0700)) {
-                        echo "Le dossier '$chemin' a été créé avec succès.";
+                        $reussi["creerDossier"] = "Le dossier '$chemin' a été créé avec succès.";
                     } else {
-                        echo "Erreur lors de la création du dossier.";
+                        $errors["pasCreerDossier"] = "Erreur lors de la création du dossier.";
                     }
                 } else {
-                    echo "Le dossier '$chemin' existe déjà.";
+                    $reussi["dossierExistseDeja"] = "Le dossier '$chemin' existe déjà.";
                 }
 
                 // Vérifiez si un fichier a été uploadé
