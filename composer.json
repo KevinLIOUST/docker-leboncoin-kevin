@@ -1,5 +1,5 @@
 {
-    "name": "utilisateur/docker-leboncoin",
+    "name": "utilisateur/docker-leboncoin-kevin",
     "autoload": {
         "psr-4": {
             "App\\": "src/"

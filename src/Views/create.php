@@ -1,9 +1,6 @@
 <?php
 // var_dump($_POST);
 // var_dump($_FILES);
-if (!isset($_SESSION["user"])) {
-    header("Location: index.php?url=login");
-}
 // var_dump($_SESSION);
 ?>
 
@@ -49,10 +46,12 @@ if (!isset($_SESSION["user"])) {
             <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=annonces">Voir
                 les annonces disponibles</a>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
-                une annonce</a>
-        </div>
+        <?php if (isset($_SESSION["user"])) { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
+                    une annonce</a>
+            </div>
+        <?php } ?>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
                 <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le
@@ -126,7 +125,7 @@ if (!isset($_SESSION["user"])) {
                 <div class="d-flex justify-content-center">
                     <div>
                         <div>
-                            <label class="mt-3 text-left" for="file">file <span class="text-danger">*</span>
+                            <label class="mt-3 text-left" for="file">Fichier<span class="text-danger">*</span>
                                 <?php if (isset($errors['file'])) { ?>
                                     <span class="text-danger"><?= $errors['file'] ?></span>
                                 <?php } else { ?>

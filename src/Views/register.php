@@ -41,10 +41,12 @@
             <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=annonces">Voir
                 les annonces disponibles</a>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
-                une annonce</a>
-        </div>
+        <?php if (isset($_SESSION["user"])) { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
+                    une annonce</a>
+            </div>
+        <?php } ?>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
                 <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le
@@ -71,7 +73,7 @@
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="username" type="text" name="username"
+                            <input class="mt-1 taille-input-register design-input-register" id="username" type="text" name="username"
                                 placeholder="username" value="<?= $_POST['username'] ?? '' ?>">
                         </div>
                     </div>
@@ -89,7 +91,7 @@
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="email" type="text" name="email"
+                            <input class="mt-1 taille-input-register design-input-register" id="email" type="text" name="email"
                                 placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
                         </div>
                     </div>
@@ -107,7 +109,7 @@
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="password" type="password" name="password"
+                            <input class="mt-1 taille-input-register design-input-register" id="password" type="password" name="password"
                                 placeholder="mot de passe" value="<?= $_POST['password'] ?? '' ?>">
                         </div>
                     </div>
@@ -126,7 +128,7 @@
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input design-input" id="confirmPassword" type="password"
+                            <input class="mt-1 taille-input-register design-input-register" id="confirmPassword" type="password"
                                 name="confirmPassword" placeholder="mot de passe"
                                 value="<?= $_POST['confirmPassword'] ?? '' ?>">
                         </div>

@@ -1,10 +1,14 @@
+<?php
+// var_dump($_SESSION);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C'est comme Leboncoin</title>
+    <title>Deconnexion</title>
 
     <!-- Lien vers Bootstrap -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
@@ -14,11 +18,9 @@
 
     <!-- Lien vers le fichier pour designer le site web -->
     <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 
 <body class="d-flex flex-column vh-100">
-
     <header class="border text-center p-3">
         <div class="d-flex justify-content-center align-items-center">
             <a href="index.php?url=home"><img src="assets/img/Logo_Site_2.png" alt="assets/img/Logo_Site_2.png"></a>
@@ -57,19 +59,25 @@
     </header>
 
     <main>
-        <h1 class="text-center mt-3">Bienvenue au magasin de composants PC spécial geek !</h1>
-        <h2 class="text-center mt-5">Ici, vous trouverez plein de composants pour PC, mais designer de façon geek comme
-            par exemple une carte graphique NVIDIA GeForce RTX 5090 ASUS ROG ASTRAL de Zelda !</h2>
-        <h2 class="text-center mt-5">Amusez-vous bien, mais faites gaffe à votre thune !</h2>
+        <h1 class="text-center mt-3">Vous avez été déconnecté avec succès !</h1>
+        <div class="d-flex justify-content-center">
+            <form action="index.php?url=home" method="POST">
+                <button class="btn-deconnexion p-3 rounded-3">Retour à la page de connexion</button>
+            </form>
+        </div>
     </main>
 
     <footer class="mt-auto text-center p-5 mt-3">
         <p>Afpa - 2025 - MVC</p>
     </footer>
 
-    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+    <script>
+        setTimeout(() => {
+            <?php unset($_SESSION["user"]); ?>
+            <?php session_destroy(); ?>
+            window.location.href = "index.php?url=home";
+        }, 3000);
+    </script>
 </body>
 
 </html>

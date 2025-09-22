@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Annonce;
 use App\Models\DatabaseConnection\Database;
 use App\Models\User;
 
@@ -109,6 +110,8 @@ class UserController
      */
     public function profil()
     {
+        $annonce = new Annonce();
+        $data = $annonce->findByUser($_SESSION["user"]["id"]);
         require_once __DIR__ . "/../Views/profil.php";
     }
 
@@ -184,8 +187,6 @@ class UserController
     // Méthode pour pouvoir se déconnecter.
     public function logout()
     {
-        unset($_SESSION["user"]);
-        session_destroy();
-        header('Location: index.php?url=login');
+        header('Location: index.php?url=logout');
     }
 }

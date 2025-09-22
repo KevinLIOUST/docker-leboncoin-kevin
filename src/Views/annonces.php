@@ -49,10 +49,12 @@
             <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=annonces">Voir
                 les annonces disponibles</a>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
-                une annonce</a>
-        </div>
+        <?php if (isset($_SESSION["user"])) { ?>
+            <div class="d-flex justify-content-center align-items-center">
+                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
+                    une annonce</a>
+            </div>
+        <?php } ?>
         <?php if (isset($_SESSION["user"])) { ?>
             <div class="d-flex justify-content-center align-items-center">
                 <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le
@@ -66,16 +68,20 @@
         <div class="div-produits">
             <?php foreach ($data as $annonce) { ?>
                 <div class="div-article m-3 p-3">
-                    <img src="/uploads/<?= $_SESSION["user"]["pseudo"] ?>/<?= $annonce["a_picture"] ?>"
-                        alt="../../public/uploads/<?= $_SESSION["user"]["pseudo"] ?>/<?= $annonce["a_picture"] ?>">
+                    <div class="d-flex justify-content-center">
+                        <img src="/uploads/<?= $annonce["a_picture"] ?>"
+                            alt="../../public/uploads/<?= $annonce["a_picture"] ?>">
+                    </div>
                     <p class="mt-2 taille-champ-nom-article"><b>Nom : </b><br><?= $annonce["a_title"] ?></p>
                     <p class="mt-2"><b>Prix : </b><br><?= $annonce["a_price"] ?> €</p>
                     <p class="mt-2"><b>Publiée le : </b><br><?= $annonce["a_publication"] ?></p>
-                    <form class="d-flex justify-content-center taille-champ-form-annonces"
-                        action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
-                        <button class="d-flex align-items-center btn-voir-details p-3 mb-3 rounded-3" type="submit"
-                            name="id" id="id">Voir les détails</button>
-                    </form>
+                    <div class="d-flex justify-content-center">
+                        <form class="d-flex justify-content-center taille-champ-form-annonces"
+                            action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
+                            <button class="d-flex align-items-center btn-voir-details p-3 mb-3 rounded-3" type="submit"
+                                name="id" id="id">Voir les détails</button>
+                        </form>
+                    </div>
                 </div>
             <?php } ?>
         </div>
