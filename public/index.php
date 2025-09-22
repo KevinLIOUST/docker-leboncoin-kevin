@@ -3,7 +3,7 @@
 /**
  * La page index.php est la première lue car les serveurs web, comme Apache,
  * sont configurés pour chercher automatiquement ce fichier comme page d'accueil par défaut d'un site.
-*/
+ */
 
 // use App\Models\DatabaseConnection\Database;
 
@@ -22,15 +22,3 @@ session_start();
 
 require_once __DIR__ . "/../vendor/autoload.php";
 require_once __DIR__ . "/routeur.php";
-
-// $objUser = new User();
-// $objUser->createUser("dddd","dddd.ooooo.com","ConventionsGeeks");
-
-// $hachage = User::checkPasswordHachByEmail("lucy.heartfilia@fairytail.com")[0]["u_password"];
-// var_dump($hachage);
-
-// $objUser->findByUser(19);
-
-// $annonce = new Annonce();
-// $image = $annonce->findImage(21)[0]["a_picture"];
-// var_dump($image);
