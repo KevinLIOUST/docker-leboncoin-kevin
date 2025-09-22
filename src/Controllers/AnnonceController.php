@@ -21,31 +21,31 @@ class AnnonceController
 
     public function supprimerAnnonce()
     {
-        if (isset($_GET["url"])) {
-            $id = explode('/', $_GET['url'])[1] ?? null;
-        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        $annonce = new Annonce();
-        $image = $annonce->findImage($id)[0]["a_picture"];
-        $annonce->deleteAnnonce($id, $_SESSION["user"]["id"]);
-
-        // Chemin vers l'image à supprimer
-        $chemin = __DIR__ . "/../../public/uploads/$image";
-
-        // Vérifier si le fichier existe
-        if (file_exists($chemin)) {
-            // Supprimer le fichier
-            if (unlink($chemin)) {
-                $reussi["imageSupprime"] = "L'image a été supprimée avec succès.";
-            } else {
-                $errors["imagePasSupprime"] = "Erreur : Impossible de supprimer l'image.";
+            if (isset($_GET["url"])) {
+                $id = explode('/', $_GET['url'])[1] ?? null;
             }
-        } else {
-            $errors["pasImage"] = "Erreur : Le fichier n'existe pas.";
+
+            $annonce = new Annonce();
+            $image = $annonce->findImage($id)[0]["a_picture"];
+            $annonce->deleteAnnonce($id, $_SESSION["user"]["id"]);
+
+            // Chemin vers l'image à supprimer
+            $chemin = __DIR__ . "/../../public/uploads/$image";
+
+            // Vérifier si le fichier existe
+            if (file_exists($chemin)) {
+                // Supprimer le fichier
+                if (unlink($chemin)) {
+                    $reussi["imageSupprime"] = "L'image a été supprimée avec succès.";
+                } else {
+                    $errors["imagePasSupprime"] = "Erreur : Impossible de supprimer l'image.";
+                }
+            } else {
+                $errors["pasImage"] = "Erreur : Le fichier n'existe pas.";
+            }
         }
-        // }
 
         include_once __DIR__ . "/../Views/profil.php";
         echo '<script>window.location.href = "index.php?url=profil";</script>';
