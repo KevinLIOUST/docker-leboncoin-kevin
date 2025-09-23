@@ -76,6 +76,11 @@ switch ($page) {
         $objController->create();
         break;
 
+    case "modifierAnnonce":
+        $objController = new AnnonceController();
+        $objController->modify();
+        break;
+
     // Page pour afficher les détails de l'article en question
     case "details":
         $objController = new AnnonceController();

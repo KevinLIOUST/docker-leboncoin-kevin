@@ -8,10 +8,94 @@ body {
 }
 
 header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   background-color: #111d4a;
+}
+
+.couleur-burger-menu {
+  background-color: #45f0df;
+}
+
+li {
+  list-style: none;
+}
+
+a, a:visited {
+  color: #45f0df;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover {
+  color: #2d968c;
+}
+
+/* Barre de navigation responsive */
+nav {
+  background-color: #111d4a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+
+  /* Pour adapter le texte a tout type d'ecran */
+  font-size: calc(0.5rem + 1.5vw);
   color: white;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+}
+
+#icons {
+  cursor: pointer;
+  display: none;
+}
+
+/* Pour la taille de l'écran pour gérer le header */
+
+/* taille < 650px */
+@media (max-width: 650px) {
+
+  /* A partir de 650px, on affiche la croix */
+  #icons {
+    display: block;
+  }
+
+  /* Avant 650px, on affiche le burger-menu avec le code \2630 */
+  #icons::before {
+    content: "\2630";
+  }
+
+  /* On veut afficher une croix quand le menu burger est ouvert */
+  .active #icons::before {
+    content: "\2715";
+  }
+
+  /* Disparition des ul */
+  nav ul {
+    position: fixed;
+    left: -100%;
+    top: 5%;
+    flex-direction: column;
+    background-color: #111d4a;
+    width: 100%;
+    text-align: right;
+    transition: 0.25s;
+  }
+
+  nav li {
+    padding: 3px 0;
+  }
+
+  nav li:hover {
+    background-color: #353b4f;
+  }
+
+  nav.active ul {
+    left: 0;
+  }
 }
 
 .liens-design {
@@ -165,7 +249,9 @@ main {
 }
 
 .div-article-details {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   width: 30%;
   margin: 2rem;
   border-radius: 8px;

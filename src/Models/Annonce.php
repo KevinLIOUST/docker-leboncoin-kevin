@@ -252,6 +252,50 @@ class Annonce
     }
 
     /**
+     * Méthode pour modifier une annonce.
+     * @param string $titre Le titre de l'annonce.
+     * @param string $description La description de l'annonce.
+     * @param float $prix Le prix de l'annonce.
+     * @param mixed $photo La photo de l'article de l'annonce.
+     * @param int $userId L'identifiant de l'utilisateur en question qui a fait l'annonce.
+     * @return bool Retourne une valeur booléenne pour dire si l'utilisateur peut modifier cette annonce ou pas.
+     */
+    public function modifierAnnonce(int $id, string $titre, string $description, float $prix, string $photo, int $userId)
+    {
+
+        // On essaye de se connnecter
+        try {
+
+            // On fait la requête SQL pour récupérer l'annonce en question avec l'id.
+            $sql = "UPDATE annonces SET a_title = '$titre', a_description = '$description', a_price = $prix, a_picture = '$photo' WHERE a_id = $id";
+
+            // On se connecte à la base de données.
+            $pdo = Database::getConnection();
+
+            // On prépare la requête pour l'utiliser.
+            $stmt = $pdo->prepare($sql);
+
+            // On exécute la requête SQL.
+            $stmt->execute();
+
+            if ($stmt->execute()) {
+                $reussi["modifieAnnonce"] = "L'annonce $id de l'utilisateur $userId a bien été modifiée.";
+                // echo "L'annonce $annonceId a bien été supprimée.";
+            } else {
+                $errors["pasModifieAnnonce"] = "L'annonce $id de l'utilisateur $userId n'a pas été modifiée.";
+                // echo "L'annonce $annonceId de l'utilisateur $userId n'a pas été supprimée.";
+            }
+
+        }
+
+        // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que les annonces pour utilisateur $annonceId n'ont pas été trouvées.
+        catch (PDOException $errorPDOException) {
+            $errors["pasModifieAnnonce"] = "L'annonce $id de l'utilisateur $userId n'a pas été modifiée." . $errorPDOException->getMessage();
+            // echo "L'annonce $annonceId de l'utilisateur $userId n'a pas été supprimée." . $errorPDOException->getMessage();
+        }
+    }
+
+    /**
      * Méthode pour retrouver l'image en question à supprimer en même temps que l'annonce.
      * @param int $annonceId L'identifiant de l'annonce en question
      */

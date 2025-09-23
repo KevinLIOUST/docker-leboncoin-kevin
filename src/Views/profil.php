@@ -82,9 +82,16 @@
                                 name="id" id="id">Voir les détails</button>
                         </form>
                         <form action="index.php?url=profil/<?= $annonce["a_id"] ?>" method="POST">
-                            <button class="d-flex align-items-center justify-content-center btn-supprime-annonce p-3 mb-3 rounded-3 ms-3 mx-3" type="submit"
-                                name="id" id="id">Supprimer</button>
+                            <button
+                                class="d-flex align-items-center justify-content-center btn-supprime-annonce p-3 mb-3 rounded-3 ms-3 mx-3"
+                                type="submit" name="id" id="id">Supprimer</button>
                         </form>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button
+                            class="d-flex align-items-center justify-content-center btn-voir-details p-3 mb-3 rounded-3 ms-3 mx-3"
+                            type="submit" name="id" id="id"
+                            onclick="window.location.href='index.php?url=modifierAnnonce/<?= $annonce['a_id'] ?>';">Modifier</button>
                     </div>
                 </div>
             <?php } ?>
