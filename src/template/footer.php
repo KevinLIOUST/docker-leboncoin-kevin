@@ -20,7 +20,7 @@
                     <div class="d-flex justify-content-center mt-5">
                         <a class="ms-3 mx-3 fs-3" href="#">CGU</a>
                         <a class="ms-3 mx-3 fs-3" href="#">CGV</a>
-                        <a class="ms-3 mx-3 fs-3" href="#">Mentions Légales</a>
+                        <a class="ms-3 mx-3 fs-3" href="#">Mentions</a>
                     </div>
                 </div>
             </div>

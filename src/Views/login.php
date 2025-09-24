@@ -24,34 +24,33 @@
         <h1 class="text-center mt-3">Se connecter</h1>
         <div class="d-flex justify-content-center align-items-center">
             <form action="" method="POST">
-                <div class="d-flex justify-content-center">
-                    <div>
-                        <div>
-                            <label class="text-left" for="email">Adresse Email <span class="text-danger">*</span><span
-                                    class="text-danger"><?= isset($errors['email']) ? $errors['email'] : '' ?></span></label>
-                        </div>
-                        <div class="text-center">
-                            <input class="mt-1 taille-input-connexion design-input-connexion" id="email" type="text"
-                                name="email" placeholder="email" value="<?= $_POST['email'] ?? '' ?>">
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Adresse Email <span class="text-danger">*</span>
+                        <?php if (isset($errors['email'])) { ?>
+                            <span class="text-danger"><?= $errors['email'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["email"])) { ?>
+                                <span class="text-success"><?= $reussi['email'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-control" id="email" type="text" name="email" placeholder="email"
+                        value="<?= $_POST['email'] ?? '' ?>">
                 </div>
-                <div class="d-flex justify-content-center">
-                    <div>
-                        <div>
-                            <label class="mt-3 text-left" for="password">Mot de passe <span
-                                    class="text-danger">*</span><span
-                                    class="text-danger"><?= isset($errors['password']) ? $errors['password'] : '' ?></span></label>
-                        </div>
-                        <div class="text-center">
-                            <input class="mt-1 taille-input-connexion design-input-connexion" id="password"
-                                type="password" name="password" placeholder="mot de passe"
-                                value="<?= $_POST['password'] ?? '' ?>">
-                        </div>
-                    </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe <span class="text-danger">*</span>
+                        <?php if (isset($errors['password'])) { ?>
+                            <span class="text-danger"><?= $errors['password'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["password"])) { ?>
+                                <span class="text-success"><?= $reussi['password'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-control" id="password" type="password" name="password" placeholder="Mot de passe"
+                        value="<?= $_POST['password'] ?? '' ?>">
                 </div>
-                <div class="d-flex justify-content-center mt-4">
-                    <input type="submit" class="btn btn-connexion" value="Se connecter">
+                <button type="submit" aria-describedby="registerHelp" class="btn btn-connexion">Se connecter</button>
+                <div id="registerHelp" class="form-text text-danger"> La connexion va vous servir à faire plein de
+                    choses.
                 </div>
             </form>
         </div>

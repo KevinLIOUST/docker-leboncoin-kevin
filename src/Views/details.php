@@ -23,22 +23,25 @@
         <h1 class="d-flex justify-content-center mt-3">Détails de l'article</h1>
         <div class="d-flex justify-content-center">
             <?php foreach ($data as $annonce) { ?>
-                <div class="div-article-details m-3 p-3">
-                    <div class="d-flex justify-content-center">
-                        <img src="/uploads/<?= $annonce["a_picture"] ?>"
+                <div class="div-article m-3 p-3">
+                    <div class="card bg-article p-3">
+                        <img src="/uploads/<?= $annonce["a_picture"] ?>" class="card-img-top"
                             alt="../../public/uploads/<?= $annonce["a_picture"] ?>">
-                    </div>
-                    <p class="mt-2"><b>Nom : </b><br><?= htmlspecialchars($annonce["a_title"]) ?></p>
-                    <p class="mt-2"><b>Description : </b><br><?= htmlspecialchars($annonce["a_description"]) ?></p>
-                    <p class="mt-2"><b>Prix : </b><br><?= $annonce["a_price"] ?> €</p>
-                    <p class="mt-2"><b>Publiée le : </b><br><?= $annonce["a_publication"] ?></p>
-                    <div class="d-flex justify-content-center">
-                        <form action="index.php?url=annonces" method="POST">
-                            <button class="btn-retour p-3 rounded-3">Retour</button>
-                        </form>
+                        <div class=" card-body">
+                            <p class="card-title mt-2"><b>Nom : </b><br><?= $annonce["a_title"] ?></p>
+                            <p class="mt-2"><b>Description : </b><br><?= $annonce["a_description"] ?></p>
+                            <p class="mt-2"><b>Prix : </b><br><?= $annonce["a_price"] ?> €</p>
+                            <p class="mt-2"><b>Publiée le : </b><br><?= $annonce["a_publication"] ?></p>
+                            <div class="d-flex justify-content-center">
+                                <form action="index.php?url=annonces" method="POST">
+                                    <button type="submit" class="btn btn-connexion">Retour</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            <?php } ?>
+            </div>
+        <?php } ?>
         </div>
     </main>
 

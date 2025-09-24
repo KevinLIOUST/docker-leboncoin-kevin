@@ -16,7 +16,7 @@ header {
 }
 
 li {
-  list-style: none;;
+  list-style: none;
 }
 
 a, a:visited {
@@ -104,7 +104,7 @@ nav ul {
   border: 3px solid black;
   background-color: #4d5deb;
   color: white;
-  width: 30rem;
+  width: 15rem;
 }
 
 .btn-voir-details {
@@ -187,8 +187,6 @@ main {
 }
 
 .div-produits {
-  width: 100%;
-  height: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   flex-wrap: wrap;
@@ -197,20 +195,15 @@ main {
 }
 
 .div-article {
-  display: block;
   margin: 2rem;
   border-radius: 8px;
   background-color: #8380b6;
 }
 
-.div-article-details {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 30%;
-  margin: 2rem;
-  border-radius: 8px;
-  background-color: #8380b6;
+.bg-article {
+  height: 100%;
+  background-color: #111d4a;
+  color: white;
 }
 
 .taille-champ-nom-article {

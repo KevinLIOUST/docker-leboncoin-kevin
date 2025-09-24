@@ -23,8 +23,8 @@
     <main>
         <h1 class="text-center mt-3 mb-3">Créer un compte</h1>
         <div class="d-flex justify-content-center align-items-center">
-            <form action="" method="POST">
-                <div class="d-flex justify-content-center mb-3">
+            <!-- <form action="" method="POST">
+                <div class="d-flex justify-content-center mb-3 input-group">
                     <div>
                         <div>
                             <label class="text-left" for="username">Choisir un pseudo (nom d'utilisateur) <span
@@ -38,8 +38,9 @@
                                 <?php } ?></label>
                         </div>
                         <div class="text-center">
-                            <input class="mt-1 taille-input-register design-input-register" id="username" type="text"
-                                name="username" placeholder="username" value="<?= $_POST['username'] ?? '' ?>">
+                            <input class="mt-1 taille-input-register design-input-register form-control" id="username"
+                                type="text" name="username" placeholder="username"
+                                value="<?= $_POST['username'] ?? '' ?>">
                         </div>
                     </div>
                 </div>
@@ -124,6 +125,80 @@
                     <?php if (isset($reussi['createUser'])) { ?>
                         <p class="text-success"><b><?= $reussi['createUser'] ?></b></p>
                     <?php } ?>
+                </div>
+            </form> -->
+            <form action="" method="POST">
+                <div class="mb-3">
+                    <label for="username" class="form-label">pseudo <span class="text-danger">*</span>
+                        <?php if (isset($errors['username'])) { ?>
+                            <span class="text-danger"><?= $errors['username'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["username"])) { ?>
+                                <span class="text-success"><?= $reussi['username'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-control" id="username" type="text" name="username"
+                        placeholder="Nom d'utilisateur" value="<?= $_POST['username'] ?? '' ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Adresse Email <span class="text-danger">*</span>
+                        <?php if (isset($errors['email'])) { ?>
+                            <span class="text-danger"><?= $errors['email'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["email"])) { ?>
+                                <span class="text-success"><?= $reussi['email'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-control" id="email" type="text" name="email" placeholder="email"
+                        value="<?= $_POST['email'] ?? '' ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe <span class="text-danger">*</span>
+                        <?php if (isset($errors['password'])) { ?>
+                            <span class="text-danger"><?= $errors['password'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["password"])) { ?>
+                                <span class="text-success"><?= $reussi['password'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-control" id="password" type="password" name="password" placeholder="Mot de passe"
+                        value="<?= $_POST['password'] ?? '' ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="confirmPassword" class="form-label">Confirmer le mot de passe <span
+                            class="text-danger">*</span>
+                        <?php if (isset($errors['confirmPassword'])) { ?>
+                            <span class="text-danger"><?= $errors['confirmPassword'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["confirmPassword"])) { ?>
+                                <span class="text-success"><?= $reussi['confirmPassword'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-control" id="confirmPassword" type="password" name="confirmPassword"
+                        placeholder="Confirmer le Mot de passe" value="<?= $_POST['confirmPassword'] ?? '' ?>">
+                </div>
+                <div class="mb-3 form-check">
+                    <label class="form-check-label" for="cgu">J'accepte les CGU
+                        <span class="text-danger">*</span>
+                        <?php if (isset($errors['cgu'])) { ?>
+                            <span class="text-danger"><?= $errors['cgu'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["cgu"])) { ?>
+                                <span class="text-success"><?= $reussi['cgu'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-check-input" id="cgu" type="checkbox" name="cgu"
+                        value="<?= $_POST['cgu'] ?? '' ?>">
+                </div>
+                <!-- <input type="submit" class="btn btn-connexion" value="Créer un compte"> -->
+                <button type="submit" aria-describedby="registerHelp" class="btn btn-connexion">Créer un compte</button>
+                <div class="d-flex justify-content-center mt-4">
+                    <?php if (isset($reussi['createUser'])) { ?>
+                        <p class="text-success"><b><?= $reussi['createUser'] ?></b></p>
+                    <?php } ?>
+                </div>
+                <div id="registerHelp" class="form-text text-danger">Partagez pas votre mot de passe et votre
+                    adresse mail.
                 </div>
             </form>
         </div>

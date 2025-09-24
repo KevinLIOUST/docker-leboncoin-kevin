@@ -66,7 +66,7 @@ class UserController
                     $errors["password"] = "Mot de passe obligatoire.";
                 } else if (strlen($_POST["password"]) < 8) {
                     // si le mot de passe est trop court, on créé une erreur
-                    $errors["password"] = "Mot de passe trop court (minimum 8 caractères).";
+                    $errors["password"] = "minimum 8 caractères.";
                 } else {
                     $reussi["password"] = "Mot de passe valide.";
                 }
@@ -78,19 +78,19 @@ class UserController
                 // on va vérifier si c'est vide
                 if (empty($_POST["confirmPassword"])) {
                     // si c'est vide, je créé une erreur dans mon tableau
-                    $errors["confirmPassword"] = "Confirmation du mot de passe obligatoire.";
+                    $errors["confirmPassword"] = "Obligatoire.";
                 } else if ($_POST["confirmPassword"] !== $_POST["password"]) {
                     // si les deux mots de passe ne sont pas identiques, on créé une erreur
-                    $errors["confirmPassword"] = "Les mots de passe ne sont pas identiques.";
+                    $errors["confirmPassword"] = "Pas identiques.";
                 } else {
-                    $reussi["confirmPassword"] = "Les mots de passe sont identiques.";
+                    $reussi["confirmPassword"] = "Identiques.";
                 }
             }
 
             // On regarde pour les cgu (Conditions Générales de vente)
             if (!isset($_POST["cgu"])) {
                 // si la case n'est pas cochée, on créé une erreur
-                $errors["cgu"] = "Vous devez accepter les CGU.";
+                $errors["cgu"] = "Faut accepter les CGU.";
             } else {
                 $reussi["cgu"] = "les CGU sont cochées.";
             }
@@ -98,7 +98,7 @@ class UserController
             if (empty($errors)) {
                 $user = new User();
                 $user->createUser($_POST['username'], $_POST["email"], password_hash($_POST["password"], PASSWORD_DEFAULT));
-                $reussi["createUser"] = "Un nouvel utilisateur viens d'être ajouté à la base de données.";
+                $reussi["createUser"] = "Un nouvel utilisateur viens d'être crée.";
             }
         }
         require_once __DIR__ . "/../Views/register.php";
