@@ -133,7 +133,7 @@ class Annonce
             $stmt->execute();
 
             // On récupère les données sous forme de tableau associatif avec l'aide de la fonction fetchAll et de la constante FETCH_ASSOC de la classe PDO
-            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
             // On regarde s'il n'y a pas de données.
             // Si c'est vide alors l'annonce n'a pas été trouvée
