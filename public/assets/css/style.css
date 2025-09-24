@@ -16,7 +16,7 @@ header {
 }
 
 li {
-  list-style: none;
+  list-style: none;;
 }
 
 a, a:visited {
@@ -44,58 +44,13 @@ nav {
 
 nav ul {
   display: flex;
-  justify-content: center;
-  width: 60%;
+  justify-content: start;
+  width: 100%;
 }
 
 #icons {
   cursor: pointer;
   display: none;
-}
-
-/* Pour la taille de l'écran pour gérer le header */
-
-/* taille < 650px */
-@media (max-width: 650px) {
-
-  /* A partir de 650px, on affiche la croix */
-  #icons {
-    display: block;
-  }
-
-  /* Avant 650px, on affiche le burger-menu avec le code \2630 */
-  #icons::before {
-    content: "\2630";
-  }
-
-  /* On veut afficher une croix quand le menu burger est ouvert */
-  .active #icons::before {
-    content: "\2715";
-  }
-
-  /* Disparition des ul */
-  nav ul {
-    position: fixed;
-    left: -100%;
-    top: 5%;
-    flex-direction: column;
-    background-color: #111d4a;
-    width: 100%;
-    text-align: right;
-    transition: 0.25s;
-  }
-
-  nav li {
-    padding: 3px 0;
-  }
-
-  nav li:hover {
-    background-color: #353b4f;
-  }
-
-  nav.active ul {
-    left: 0;
-  }
 }
 
 .liens-design {
@@ -267,6 +222,11 @@ main {
 }
 
 footer {
+  background-color: #111d4a;
+  color: white;
+}
+
+.background-color-footer {
   background-color: #111d4a;
   color: white;
 }

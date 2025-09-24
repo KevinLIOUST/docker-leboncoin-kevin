@@ -21,42 +21,7 @@
 </head>
 
 <body class="d-flex flex-column vh-100">
-    <header class="border text-center p-3">
-        <div class="d-flex justify-content-center align-items-center">
-            <a href="index.php?url=home"><img src="assets/img/Logo_Site_2.png" alt="assets/img/Logo_Site_2.png"></a>
-        </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=register">Créer
-                un compte</a>
-        </div>
-        <?php if (isset($_SESSION["user"])) { ?>
-            <div class="d-flex justify-content-center align-items-center">
-                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=logout">Se
-                    déconnecter</a>
-            </div>
-        <?php } else { ?>
-            <div class="d-flex justify-content-center align-items-center">
-                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=login">Se
-                    connecter</a>
-            </div>
-        <?php } ?>
-        <div class="d-flex justify-content-center align-items-center">
-            <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=annonces">Voir
-                les annonces disponibles</a>
-        </div>
-        <?php if (isset($_SESSION["user"])) { ?>
-            <div class="d-flex justify-content-center align-items-center">
-                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=create">Créer
-                    une annonce</a>
-            </div>
-        <?php } ?>
-        <?php if (isset($_SESSION["user"])) { ?>
-            <div class="d-flex justify-content-center align-items-center">
-                <a class="d-flex justify-content-center align-items-center liens-design" href="index.php?url=profil">Voir le
-                    profil de <?= $_SESSION["user"]["pseudo"] ?></a>
-            </div>
-        <?php } ?>
-    </header>
+    <?php include_once __DIR__ . "/../Template/header.php"; ?>
 
     <main>
         <h1 class="text-center mt-3">Vous avez été déconnecté avec succès !</h1>
@@ -67,9 +32,7 @@
         </div>
     </main>
 
-    <footer class="mt-auto text-center p-5 mt-3">
-        <p>Afpa - 2025 - MVC</p>
-    </footer>
+    <?php include_once __DIR__ . "/../Template/footer.php"; ?>
 
     <script>
         setTimeout(() => {
@@ -78,6 +41,10 @@
             window.location.href = "index.php?url=home";
         }, 3000);
     </script>
+
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
