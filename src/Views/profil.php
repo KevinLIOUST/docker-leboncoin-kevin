@@ -30,8 +30,8 @@
 
     <main>
         <h1 class="d-flex justify-content-center mt-3">Annonces de <?= $_SESSION["user"]["pseudo"] ?></h1>
-        <div class="div-produits">
-            <?php foreach ($data as $annonce) { ?>
+        <div class="container">
+            <!-- <?php foreach ($data as $annonce) { ?>
                 <div class="div-article m-3 p-3">
                     <div class="d-flex justify-content-center">
                         <img src="/uploads/<?= $annonce["a_picture"] ?>"
@@ -57,6 +57,38 @@
                             class="d-flex align-items-center justify-content-center btn-voir-details p-3 mb-3 rounded-3 ms-3 mx-3"
                             type="submit" name="id" id="id"
                             onclick="window.location.href='index.php?url=modifierAnnonce/<?= $annonce['a_id'] ?>';">Modifier</button>
+                    </div>
+                </div>
+            <?php } ?> -->
+            <?php foreach ($data as $annonce) { ?>
+                <div class="div-article m-3 p-3">
+                    <div class="card bg-article p-3">
+                        <img src="/uploads/<?= $annonce["a_picture"] ?>" class="card-img-top"
+                            alt="/uploads/<?= $annonce["a_picture"] ?>">
+                        <div class="card-body">
+                            <p class="card-title mt-2"><b>Nom : </b><br><?= $annonce["a_title"] ?></p>
+                            <p class="mt-2"><b>Prix : </b><br><?= $annonce["a_price"] ?> €</p>
+                            <p class="mt-2"><b>Publiée le : </b><br><?= $annonce["a_publication"] ?></p>
+                            <div class="d-flex justify-content-center">
+                                <form action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
+                                    <button type="submit" class="btn btn-connexion p-3 mb-3 rounded-3">Voir les
+                                        détails</button>
+                                </form>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button
+                                    class="d-flex align-items-center justify-content-center btn-connexion p-3 mb-3 rounded-3"
+                                    type="submit" name="id" id="id"
+                                    onclick="window.location.href='index.php?url=modifierAnnonce/<?= $annonce['a_id'] ?>';">Modifier</button>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <form action="index.php?url=profil/<?= $annonce["a_id"] ?>" method="POST">
+                                    <button
+                                        class="d-flex align-items-center justify-content-center btn-supprime-annonce p-3 mb-3 rounded-3"
+                                        type="submit" name="id" id="id">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php } ?>

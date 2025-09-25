@@ -90,9 +90,9 @@ class UserController
             // On regarde pour les cgu (Conditions Générales de vente)
             if (!isset($_POST["cgu"])) {
                 // si la case n'est pas cochée, on créé une erreur
-                $errors["cgu"] = "Faut accepter les CGU.";
+                $errors["cgu"] = "Obligatoire.";
             } else {
-                $reussi["cgu"] = "les CGU sont cochées.";
+                $reussi["cgu"] = "CGU cochées.";
             }
 
             if (empty($errors)) {

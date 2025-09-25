@@ -21,7 +21,7 @@
                         <?php } ?>
                     </li>
                     <li class="nav-item">
-                        <a class="ms-3 mx-3 fs-5" href="index.php?url=annonces">Voir les annonces
+                        <a class="ms-3 mx-3 fs-5" href="index.php?url=annonces">Annonces
                             disponibles</a>
                     </li>
                     <?php if (isset($_SESSION["user"])) { ?>
@@ -31,8 +31,8 @@
                     <?php } ?>
                     <?php if (isset($_SESSION["user"])) { ?>
                         <li class="nav-item">
-                            <a class="ms-3 mx-3 fs-5" href="index.php?url=profil">Voir le
-                                profil de <?= $_SESSION["user"]["pseudo"] ?></a>
+                            <a class="ms-3 mx-3 fs-5" href="index.php?url=profil">Profil de
+                                <?= $_SESSION["user"]["pseudo"] ?></a>
                         </li>
                     <?php } ?>
                 </ul>

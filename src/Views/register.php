@@ -127,7 +127,7 @@
                     <?php } ?>
                 </div>
             </form> -->
-            <form action="" method="POST">
+            <form class="w-75" action="" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">pseudo <span class="text-danger">*</span>
                         <?php if (isset($errors['username'])) { ?>
@@ -190,17 +190,20 @@
                     <input class="form-check-input" id="cgu" type="checkbox" name="cgu"
                         value="<?= $_POST['cgu'] ?? '' ?>">
                 </div>
-                <!-- <input type="submit" class="btn btn-connexion" value="Créer un compte"> -->
-                <button type="submit" aria-describedby="registerHelp" class="btn btn-connexion">Créer un compte</button>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-connexion">Créer un compte</button>
+                </div>
                 <div class="d-flex justify-content-center mt-4">
                     <?php if (isset($reussi['createUser'])) { ?>
                         <p class="text-success"><b><?= $reussi['createUser'] ?></b></p>
                     <?php } ?>
                 </div>
-                <div id="registerHelp" class="form-text text-danger">Partagez pas votre mot de passe et votre
-                    adresse mail.
-                </div>
             </form>
+        </div>
+        <div class="d-flex justify-content-center text-danger">
+            <p>
+                Attention, partagez pas d'infos sensibles.
+            </p>
         </div>
     </main>
 

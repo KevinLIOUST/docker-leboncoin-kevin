@@ -23,7 +23,7 @@
     <main>
         <h1 class="text-center mt-3">Se connecter</h1>
         <div class="d-flex justify-content-center align-items-center">
-            <form action="" method="POST">
+            <form class="w-75" action="" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">Adresse Email <span class="text-danger">*</span>
                         <?php if (isset($errors['email'])) { ?>
@@ -48,10 +48,13 @@
                     <input class="form-control" id="password" type="password" name="password" placeholder="Mot de passe"
                         value="<?= $_POST['password'] ?? '' ?>">
                 </div>
-                <button type="submit" aria-describedby="registerHelp" class="btn btn-connexion">Se connecter</button>
-                <div id="registerHelp" class="form-text text-danger"> La connexion va vous servir à faire plein de
-                    choses.
+                <!-- aria-describedby="registerHelp" -->
+                <div class="d-flex justify-content-center m-4">
+                    <button type="submit" class="btn btn-connexion">Se connecter</button>
                 </div>
+                <!-- <div id="registerHelp" class="form-text text-danger"> La connexion va vous servir à faire plein de
+                    choses.
+                </div> -->
             </form>
         </div>
     </main>
