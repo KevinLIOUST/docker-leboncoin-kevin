@@ -25,7 +25,7 @@
     vh-100
 <?php } else { ?>
     vh-auto
-<?php } ?>">
+<?php } ?>bg-dark text-white">
     <?php include_once __DIR__ . "/../Template/header.php"; ?>
 
     <main>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="d-flex justify-content-center align-items-end">
                             <form action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
-                                <button type="submit" class="btn btn-connexion p-3 mb-3 rounded-3">Voir les
+                                <button type="submit" class="btn btn-page p-3 mb-3 rounded-3">Voir les
                                     détails</button>
                             </form>
                         </div>

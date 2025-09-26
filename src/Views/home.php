@@ -17,7 +17,7 @@
 
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100 bg-dark text-white">
 
     <?php include_once __DIR__ . "/../Template/header.php"; ?>
 

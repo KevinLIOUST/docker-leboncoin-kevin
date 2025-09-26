@@ -13,11 +13,6 @@ header {
   background-color: #111d4a;
 }
 
-.header-scroll {
-  overflow: visible;
-  scroll-behavior: smooth;
-}
-
 /* Couleur du menu burger */
 .couleur-burger-menu {
   background-color: #45f0df;
@@ -28,10 +23,12 @@ li {
   list-style: none;
 }
 
+/* Design des liens de navigation */
 a, a:visited {
   color: #45f0df;
   text-decoration: none;
   text-transform: uppercase;
+  font-size: 0.85rem;
 }
 
 /* Quand on passe la souris sur les liens */
@@ -59,71 +56,31 @@ nav ul {
   width: 100%;
 }
 
-/* .liens-design {
-  width: 12rem;
-  height: 6rem;
-  text-decoration: none;
-  background-color: #45f0df;
-  color: black;
-  padding: 2rem;
-  border-radius: 8px;
-} */
-
-.taille-input-connexion {
-  width: 30rem;
+/* Taille du logo du site internet */
+.taille-img {
+  width: 75%;
+  height: auto;
 }
 
-.design-input-connexion {
-  border-radius: 8px;
-  height: 3rem;
-  border-color: 3px solid #4d5deb;
-}
-
-.taille-input-create-annonce {
-  width: 60rem;
-}
-
-.design-input-create-annonce {
-  border-radius: 8px;
-  height: 3rem;
-  border-color: 3px solid #4d5deb;
-}
-
-.taille-input-register {
-  width: 30rem;
-}
-
-.design-input-register {
-  border-radius: 8px;
-  height: 3rem;
-  border-color: 3px solid #4d5deb;
-}
-
-.design-input-create-annonce-description {
-  border-radius: 8px;
-  height: 10rem;
-  border-color: 3px solid #4d5deb;
-}
-
-.btn-connexion {
+.btn-page {
   font-size: large;
-  border: 3px solid black;
+  border: 8px solid #2d968c;
   background-color: #4d5deb;
   color: white;
   width: 15rem;
 }
 
-.btn-voir-details {
+.btn-page:hover {
   font-size: large;
-  border: 3px solid black;
-  background-color: #4d5deb;
+  border: 8px solid #2d968c;
+  background-color: #7682e7;
   color: white;
-  width: 10rem;
+  width: 15rem;
 }
 
 .btn-supprime-annonce {
   font-size: large;
-  border: 3px solid black;
+  border: 8px solid #2d968c;
   background-color: #eb4d4d;
   color: white;
   width: 15rem;
@@ -131,72 +88,21 @@ nav ul {
 
 .btn-supprime-annonce:hover {
   font-size: large;
-  border: 3px solid black;
+  border: 8px solid #2d968c;
   background-color: #f38484;
   color: white;
   width: 15rem;
 }
 
-.btn-voir-details:hover {
-  font-size: large;
-  border: 3px solid black;
-  background-color: #6f8fec;
-  color: white;
-  width: 10rem;
-}
-
-.btn-deconnexion {
-  font-size: large;
-  border: 3px solid black;
-  background-color: #4d5deb;
-  color: white;
-  width: 30rem;
-}
-
-.btn-deconnexion:hover {
-  font-size: large;
-  border: 3px solid black;
-  background-color: #6f8fec;
-  color: white;
-  width: 30rem;
-}
-
-.btn-retour {
-  font-size: large;
-  border: 3px solid black;
-  background-color: #4d5deb;
-  color: white;
-  width: 10rem;
-}
-
-.btn-retour:hover {
-  font-size: large;
-  border: 3px solid black;
-  background-color: #6f8fec;
-  color: white;
-  width: 10rem;
-}
-
-.btn-connexion:hover {
-  background-color: #6f8fec;
-  border: 3px solid black;
-  color: white;
-}
-
-.liens-design:hover {
-  background-color: #2d968c;
-}
-
-main {
-  /* height: 100%; */
-  background-color: #c2cae8;
+.taille-nom-article {
+  height: 8rem;
 }
 
 .container {
   display: grid;
 
   /* On fait un repeat(auto-fit, minmax(...)) pour un wrapping fluide */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 15px;
 }
 
@@ -209,22 +115,19 @@ main {
 
 .div-article {
   margin: 2rem;
-  border-radius: 8px;
-  background-color: #8380b6;
+  border-radius: 16px;
+  background-color: #45f0df;
+}
+
+.div-input {
+  border-radius: 16px;
+  background-color: #45f0df;
 }
 
 .bg-article {
   height: 100%;
   background-color: #111d4a;
   color: white;
-}
-
-.taille-champ-nom-article {
-  height: 10%;
-}
-
-.taille-champ-form-annonces {
-  height: 10%;
 }
 
 footer {

@@ -20,15 +20,15 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100 bg-dark text-white">
     <?php include_once __DIR__ . "/../Template/header.php"; ?>
 
     <main>
         <h1 class="text-center mt-3">Vous avez été déconnecté avec succès !</h1>
         <div class="d-flex justify-content-center">
-            <form action="index.php?url=home" method="POST">
-                <button class="btn-deconnexion p-3 rounded-3">Retour à la page de connexion</button>
-            </form>
+            <button class="btn-page p-3 rounded-3 mb-4" onclick="window.location.href='index.php?url=login';">
+                Page de connection
+            </button>
         </div>
     </main>
 
@@ -38,7 +38,7 @@
         setTimeout(() => {
             <?php unset($_SESSION["user"]); ?>
             <?php session_destroy(); ?>
-            window.location.href = "index.php?url=home";
+            window.location.href = "index.php?url=login";
         }, 3000);
     </script>
 

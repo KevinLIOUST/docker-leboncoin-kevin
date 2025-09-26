@@ -1,6 +1,6 @@
 <footer>
     <div class="row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="col mb-3 mb-sm-0">
             <div class="card background-color-footer">
                 <div class="d-flex justify-content-center align-items-center card-body background-color-footer">
                     <iframe
@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-center align-items-center col-sm-6">
+        <div class="d-flex justify-content-center align-items-center col">
             <div class="card background-color-footer">
                 <div class="card-body background-color-footer">
                     <p class="text-center fs-4">Leboncoin du Gamer Légendaire Comic ZIN Akihabara</p>

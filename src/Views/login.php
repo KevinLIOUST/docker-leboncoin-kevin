@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100 bg-dark text-white">
 
     <?php include_once __DIR__ . "/../Template/header.php"; ?>
 
@@ -33,8 +33,10 @@
                                 <span class="text-success"><?= $reussi['email'] ?></span>
                             <?php } ?>
                         <?php } ?></label>
-                    <input class="form-control" id="email" type="text" name="email" placeholder="email"
-                        value="<?= $_POST['email'] ?? '' ?>">
+                    <div class="div-input p-2">
+                        <input class="form-control" id="email" type="text" name="email" placeholder="email"
+                            value="<?= $_POST['email'] ?? '' ?>">
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Mot de passe <span class="text-danger">*</span>
@@ -45,12 +47,14 @@
                                 <span class="text-success"><?= $reussi['password'] ?></span>
                             <?php } ?>
                         <?php } ?></label>
-                    <input class="form-control" id="password" type="password" name="password" placeholder="Mot de passe"
-                        value="<?= $_POST['password'] ?? '' ?>">
+                    <div class="div-input p-2">
+                        <input class="form-control" id="password" type="password" name="password"
+                            placeholder="Mot de passe" value="<?= $_POST['password'] ?? '' ?>">
+                    </div>
                 </div>
                 <!-- aria-describedby="registerHelp" -->
                 <div class="d-flex justify-content-center m-4">
-                    <button type="submit" class="btn btn-connexion">Se connecter</button>
+                    <button type="submit" class="btn btn-page">Se connecter</button>
                 </div>
                 <!-- <div id="registerHelp" class="form-text text-danger"> La connexion va vous servir à faire plein de
                     choses.

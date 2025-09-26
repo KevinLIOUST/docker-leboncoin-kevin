@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100 bg-dark text-white">
     <?php include_once __DIR__ . "/../Template/header.php"; ?>
 
     <main>
@@ -38,8 +38,10 @@
                                 <span class="text-success"><?= $reussi['titre'] ?></span>
                             <?php } ?>
                         <?php } ?></label>
-                    <input class="form-control" id="titre" type="text" name="titre" placeholder="Titre de l'annonce"
-                        value="<?= $_POST['titre'] ?? '' ?>">
+                    <div class="div-input p-2">
+                        <input class="form-control" id="titre" type="text" name="titre" placeholder="Titre de l'annonce"
+                            value="<?= $_POST['titre'] ?? '' ?>">
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description <span class="text-danger">*</span>
@@ -51,8 +53,10 @@
                             <?php } ?>
                         <?php } ?></label>
                     <div class="text-center">
-                        <textarea class="form-control" name="description" id="description" rows="10"
-                            placeholder="description de l'annonce"><?= $_POST['description'] ?? "" ?></textarea>
+                        <div class="div-input p-2">
+                            <textarea class="form-control" name="description" id="description" rows="10"
+                                placeholder="description de l'annonce"><?= $_POST['description'] ?? "" ?></textarea>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -64,8 +68,10 @@
                                 <span class="text-success"><?= $reussi['prix'] ?></span>
                             <?php } ?>
                         <?php } ?></label>
-                    <input class="form-control" id="prix" type="number" name="prix" placeholder="Prix de l'article"
-                        value="<?= $_POST['prix'] ?? '' ?>">
+                    <div class="div-input p-2">
+                        <input class="form-control" id="prix" type="number" name="prix" placeholder="Prix de l'article"
+                            value="<?= $_POST['prix'] ?? '' ?>">
+                    </div>
                 </div>
                 <div>
                     <label class="mt-3 text-left" for="file">Fichier <span class="text-danger">*</span>
@@ -76,17 +82,20 @@
                                 <span class="text-success"><?= $reussi['file'] ?></span>
                             <?php } ?>
                         <?php } ?></label>
-                    <input class="form-control" id="file" type="file" name="file" value="<?= $_POST['file'] ?? '' ?>">
+                    <div class="div-input p-2">
+                        <input class="form-control" id="file" type="file" name="file"
+                            value="<?= $_POST['file'] ?? '' ?>">
+                    </div>
                 </div>
                 <div class="d-flex justify-content-center mt-4 mb-4">
-                    <input type="submit" class="btn btn-connexion" value="Créer une annonce">
+                    <input type="submit" class="btn btn-page" value="Créer une annonce">
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <?php if (isset($reussi["createAnnonce"])) { ?>
+                        <p class="text-success"><b><?= $reussi["createAnnonce"] ?></b></p>
+                    <?php } ?>
                 </div>
             </form>
-            <div class="d-flex justify-content-center mt-4">
-                <?php if (isset($reussi["createAnnonce"])) { ?>
-                    <p class="text-success"><b><?= $reussi["createAnnonce"] ?></b></p>
-                <?php } ?>
-            </div>
         </div>
     </main>
 

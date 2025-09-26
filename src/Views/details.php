@@ -21,7 +21,7 @@ var_dump($data);
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100 bg-dark text-white">
     <?php include_once __DIR__ . "/../Template/header.php"; ?>
 
     <main>
@@ -38,7 +38,7 @@ var_dump($data);
                         <p class="mt-2"><b>Publiée le : </b><br><?= $data["a_publication"] ?></p>
                         <div class="d-flex justify-content-center align-items-end">
                             <form action="index.php?url=annonces" method="POST">
-                                <button type="submit" class="btn btn-connexion p-3 mb-3 rounded-3">Retour</button>
+                                <button type="submit" class="btn btn-page p-3 mb-3 rounded-3">Retour</button>
                             </form>
                         </div>
                     </div>
