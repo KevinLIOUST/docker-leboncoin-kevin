@@ -28,91 +28,65 @@
     <main>
         <h1 class="text-center mt-3 mb-3">Créer une annonce</h1>
         <div class="d-flex justify-content-center align-items-center">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="d-flex justify-content-center mb-3">
-                    <div>
-                        <div>
-                            <label class="text-left" for="titre">Titre <span class="text-danger">*</span>
-                                <?php if (isset($errors['titre'])) { ?>
-                                    <span class="text-danger"><?= $errors['titre'] ?></span>
-                                <?php } else { ?>
-                                    <?php if (isset($reussi["titre"])) { ?>
-                                        <span class="text-success"><?= $reussi['titre'] ?></span>
-                                    <?php } ?>
-                                <?php } ?></label>
-                        </div>
-                        <div class="text-center">
-                            <input class="mt-1 taille-input-create-annonce design-input-create-annonce" id="titre"
-                                type="text" name="titre" placeholder="titre de l'annonce"
-                                value="<?= $_POST['titre'] ?? '' ?>">
-                        </div>
+            <form class="w-75" action="" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="titre" class="form-label">Titre <span class="text-danger">*</span>
+                        <?php if (isset($errors['titre'])) { ?>
+                            <span class="text-danger"><?= $errors['titre'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["titre"])) { ?>
+                                <span class="text-success"><?= $reussi['titre'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-control" id="titre" type="text" name="titre" placeholder="Titre de l'annonce"
+                        value="<?= $_POST['titre'] ?? '' ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description <span class="text-danger">*</span>
+                        <?php if (isset($errors['description'])) { ?>
+                            <span class="text-danger"><?= $errors['description'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["description"])) { ?>
+                                <span class="text-success"><?= $reussi['description'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <div class="text-center">
+                        <textarea class="form-control" name="description" id="description" rows="10"
+                            placeholder="description de l'annonce"><?= $_POST['description'] ?? "" ?></textarea>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <div>
-                        <div>
-                            <label class="text-left" for="description">Description <span class="text-danger">*</span>
-                                <?php if (isset($errors['description'])) { ?>
-                                    <span class="text-danger"><?= $errors['description'] ?></span>
-                                <?php } else { ?>
-                                    <?php if (isset($reussi["description"])) { ?>
-                                        <span class="text-success"><?= $reussi['description'] ?></span>
-                                    <?php } ?>
-                                <?php } ?></label>
-                        </div>
-                        <div class="text-center">
-                            <textarea class="taille-input-create-annonce design-input-create-annonce-description"
-                                name="description" id="description"
-                                placeholder="description de l'annonce"><?= $_POST['description'] ?? "" ?></textarea>
-                        </div>
-                    </div>
+                <div>
+                    <label class="mt-3 text-left" for="prix">Prix <span class="text-danger">*</span>
+                        <?php if (isset($errors['prix'])) { ?>
+                            <span class="text-danger"><?= $errors['prix'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["prix"])) { ?>
+                                <span class="text-success"><?= $reussi['prix'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-control" id="prix" type="number" name="prix" placeholder="Prix de l'article"
+                        value="<?= $_POST['prix'] ?? '' ?>">
                 </div>
-                <div class="d-flex justify-content-center">
-                    <div>
-                        <div>
-                            <label class="mt-3 text-left" for="prix">Prix <span class="text-danger">*</span>
-                                <?php if (isset($errors['prix'])) { ?>
-                                    <span class="text-danger"><?= $errors['prix'] ?></span>
-                                <?php } else { ?>
-                                    <?php if (isset($reussi["prix"])) { ?>
-                                        <span class="text-success"><?= $reussi['prix'] ?></span>
-                                    <?php } ?>
-                                <?php } ?></label>
-                        </div>
-                        <div class="text-center">
-                            <input class="mt-1 taille-input-create-annonce design-input-create-annonce" id="prix"
-                                type="number" name="prix" placeholder="Prix de l'article"
-                                value="<?= $_POST['prix'] ?? '' ?>">
-                        </div>
-                    </div>
+                <div>
+                    <label class="mt-3 text-left" for="file">Fichier <span class="text-danger">*</span>
+                        <?php if (isset($errors['file'])) { ?>
+                            <span class="text-danger"><?= $errors['file'] ?></span>
+                        <?php } else { ?>
+                            <?php if (isset($reussi["file"])) { ?>
+                                <span class="text-success"><?= $reussi['file'] ?></span>
+                            <?php } ?>
+                        <?php } ?></label>
+                    <input class="form-control" id="file" type="file" name="file" value="<?= $_POST['file'] ?? '' ?>">
                 </div>
-                <div class="d-flex justify-content-center">
-                    <div>
-                        <div>
-                            <label class="mt-3 text-left" for="file">Fichier<span class="text-danger">*</span>
-                                <?php if (isset($errors['file'])) { ?>
-                                    <span class="text-danger"><?= $errors['file'] ?></span>
-                                <?php } else { ?>
-                                    <?php if (isset($reussi["file"])) { ?>
-                                        <span class="text-success"><?= $reussi['file'] ?></span>
-                                    <?php } ?>
-                                <?php } ?></label>
-                        </div>
-                        <div class="text-center">
-                            <input class="mt-1 taille-input-create-annonce design-input-create-annonce" id="file"
-                                type="file" name="file">
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center mt-4">
+                <div class="d-flex justify-content-center mt-4 mb-4">
                     <input type="submit" class="btn btn-connexion" value="Créer une annonce">
                 </div>
-                <div class="d-flex justify-content-center mt-4">
-                    <?php if (isset($reussi["createAnnonce"])) { ?>
-                        <p class="text-success"><b><?= $reussi["createAnnonce"] ?></b></p>
-                    <?php } ?>
-                </div>
             </form>
+            <div class="d-flex justify-content-center mt-4">
+                <?php if (isset($reussi["createAnnonce"])) { ?>
+                    <p class="text-success"><b><?= $reussi["createAnnonce"] ?></b></p>
+                <?php } ?>
+            </div>
         </div>
     </main>
 
