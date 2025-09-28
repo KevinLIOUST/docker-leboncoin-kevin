@@ -35,6 +35,12 @@
                                 <?= $_SESSION["user"]["pseudo"] ?></a>
                         </li>
                     <?php } ?>
+                    <?php if (isset($_SESSION["user"])) { ?>
+                        <li class="nav-item">
+                            <a class="ms-3 mx-3" href="index.php?url=favoris">Favoris de
+                                <?= $_SESSION["user"]["pseudo"] ?></a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>

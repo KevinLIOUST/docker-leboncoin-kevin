@@ -3,6 +3,7 @@
 // Ici, on va chercher les classes pour les utiliser
 // Le "App" correspond à "src/" dans l'arborescence du projet dans le composer.json (PSR4)
 use App\Controllers\AnnonceController;
+use App\Controllers\FavorisController;
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
 use App\Models\Annonce;
@@ -85,6 +86,11 @@ switch ($page) {
     case "details":
         $objController = new AnnonceController();
         $objController->show($id);
+        break;
+
+    case "favoris":
+        $objController = new FavorisController();
+        $objController->index();
         break;
 
     // Page d'erreur qui s'affiche quand la page n'existe pas (Par exemple quand l'utilisateur modifie l'url à la main et met une page qui n'existe pas ou un identifiant d'article introuvable)
