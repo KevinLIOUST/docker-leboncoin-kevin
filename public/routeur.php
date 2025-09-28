@@ -44,32 +44,50 @@ switch ($page) {
 
     // Page de connection au site Internet
     case "login":
-        $objController = new UserController();
-        $objController->login();
-        break;
+        if (!isset($_SESSION["user"])) {
+            $objController = new UserController();
+            $objController->login();
+            break;
+        } else {
+            break;
+        }
 
     // Page de bienvenue juste après avoir réussi à se connecter
     case "welcome":
-        include_once __DIR__ . "/../src/Views/welcome.php";
-        break;
+        if (isset($_SESSION["user"])) {
+            include_once __DIR__ . "/../src/Views/welcome.php";
+            break;
+        } else {
+            header("Location: index.php?url=login");
+            break;
+        }
 
     // Page d'affichage de l'espace personnel de l'utilisateur
     case "profil":
-        $objController = new UserController();
-        $objController->profil();
+        if (isset($_SESSION["user"])) {
+            $objController = new UserController();
+            $objController->profil();
 
-        if ($id == null) {
+            if ($id == null) {
+                break;
+            } else {
+                $objController = new AnnonceController();
+                $objController->supprimerAnnonce();
+            }
             break;
         } else {
-            $objController = new AnnonceController();
-            $objController->supprimerAnnonce();
+            header("Location: index.php?url=login");
+            break;
         }
-        break;
 
     // Page de déconnexion
     case "logout":
-        include_once __DIR__ . "/../src/Views/logout.php";
-        break;
+        if (isset($_SESSION["user"])) {
+            include_once __DIR__ . "/../src/Views/logout.php";
+            break;
+        } else {
+            header("Location: index.php?url=login");
+        }
 
     // Page pour afficher toutes les annonces de la liste générale
     case "annonces":
@@ -79,14 +97,22 @@ switch ($page) {
 
     // Page pour créer une annonce, accéssible quand un utilisateur se connectera
     case "create":
-        $objController = new AnnonceController();
-        $objController->create();
-        break;
+        if (isset($_SESSION["user"])) {
+            $objController = new AnnonceController();
+            $objController->create();
+            break;
+        } else {
+            break;
+        }
 
     case "modifierAnnonce":
-        $objController = new AnnonceController();
-        $objController->modify();
-        break;
+        if (isset($_SESSION["user"])) {
+            $objController = new AnnonceController();
+            $objController->modify();
+            break;
+        } else {
+            header("Location: index.php?url=login");
+        }
 
     // Page pour afficher les détails de l'article en question
     case "details":
@@ -95,17 +121,21 @@ switch ($page) {
         break;
 
     case "favoris":
-        $objController = new FavorisController();
-        $objController->index();
+        if (isset($_SESSION["user"])) {
+            $objController = new FavorisController();
+            $objController->index();
 
-        if ($action == "add") {
-            $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été ajoutée aux Favoris";
-            $objController->add($idAnnonce);
-            break;
-        } elseif ($action == "remove") {
-            $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été supprimée des Favoris";
-            $objController->remove($idAnnonce);
-            break;
+            if ($action == "add") {
+                $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été ajoutée aux Favoris";
+                $objController->add($idAnnonce);
+                break;
+            } elseif ($action == "remove") {
+                $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été supprimée des Favoris";
+                $objController->remove($idAnnonce);
+                break;
+            }
+        } else {
+            header("Location: index.php?url=login");
         }
 
         break;
