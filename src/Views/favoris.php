@@ -1,6 +1,6 @@
 <?php
 // var_dump($data);
-var_dump($_SESSION);
+// var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ var_dump($_SESSION);
                         <div class="d-flex justify-content-center align-items-end">
                             <form action="index.php?url=favoris/remove/<?= $annonce["a_id"] ?>" method="POST">
                                 <button type="submit" class="btn btn-supprime-annonce p-3 mb-3 rounded-3">Supprimer
-                                    favoris</button>
+                                    favori</button>
                             </form>
                         </div>
                     </div>

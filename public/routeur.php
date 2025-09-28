@@ -7,6 +7,7 @@ use App\Controllers\FavorisController;
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
 use App\Models\Annonce;
+use App\Models\Favori;
 
 // si le param url est présent on prend sa valeur, sinon on donne la valeur home
 $url = $_GET['url'] ?? 'home';
@@ -71,10 +72,20 @@ switch ($page) {
             if ($id == null) {
                 break;
             } else {
+                $objFavoriController = new FavorisController();
+                $objFavoriController->remove($id);
+
                 $objController = new AnnonceController();
                 $objController->supprimerAnnonce();
+
+                // $objAnnonce = new Favori();
+                // $tabIdAnnonces = $objAnnonce->findByUser($_SESSION["user"]["id"]);
+                // if ($_SESSION["user"]["id"] != $tabIdAnnonces["u_id"]) {
+
+                //     break;
+                // }
+                break;
             }
-            break;
         } else {
             header("Location: index.php?url=login");
             break;
@@ -126,13 +137,23 @@ switch ($page) {
             $objController->index();
 
             if ($action == "add") {
-                $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été ajoutée aux Favoris";
-                $objController->add($idAnnonce);
-                break;
+                $objAnnonce = new Annonce();
+                $tabIdAnnonces = $objAnnonce->findById($idAnnonce);
+                if (empty($tabIdAnnonces)) {
+                    break;
+                } elseif ($_SESSION["user"]["id"] != $tabIdAnnonces["u_id"]) {
+                    $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été ajoutée aux Favoris";
+                    $objController->add($idAnnonce);
+                    break;
+                }
             } elseif ($action == "remove") {
-                $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été supprimée des Favoris";
-                $objController->remove($idAnnonce);
-                break;
+                $objAnnonce = new Annonce();
+                $tabIdAnnonces = $objAnnonce->findById($idAnnonce);
+                if ($_SESSION["user"]["id"] != $tabIdAnnonces["u_id"]) {
+                    $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été supprimée des Favoris";
+                    $objController->remove($idAnnonce);
+                    break;
+                }
             }
         } else {
             header("Location: index.php?url=login");

@@ -30,6 +30,11 @@
 
     <main>
         <h1 class="d-flex justify-content-center mt-3">Annonces</h1>
+        <?php if (empty($data)) { ?>
+            <div class="d-flex justify-content-center mb-3 mt-3">
+                <b>Il n'y a pas encore d'annonces publiées pour l'instant.</b>
+            </div>
+        <?php } ?>
         <div class="container">
             <?php foreach ($data as $annonce) { ?>
                 <div class="div-article m-3 p-3">
