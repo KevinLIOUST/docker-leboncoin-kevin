@@ -37,15 +37,25 @@
                         <img src="/uploads/<?= $annonce["a_picture"] ?>" class="card-img-top"
                             alt="/uploads/<?= $annonce["a_picture"] ?>">
                         <div class="card-body">
-                            <p class="card-title mt-2"><b>Nom : </b><br><?= $annonce["a_title"] ?></p>
+                            <p class="card-title mt-2 taille-nom-article"><b>Nom : </b><br><?= $annonce["a_title"] ?></p>
                             <p class="mt-2"><b>Prix : </b><br><?= $annonce["a_price"] ?> €</p>
                             <p class="mt-2"><b>Publiée le : </b><br><?= $annonce["a_publication"] ?></p>
                         </div>
-                        <div class="d-flex justify-content-center align-items-end">
-                            <form action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
-                                <button type="submit" class="btn btn-page p-3 mb-3 rounded-3">Voir les
-                                    détails</button>
-                            </form>
+                        <div class="d-block justify-content-center align-items-end">
+                            <div class="d-flex justify-content-center align-items-end">
+                                <form action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
+                                    <button type="submit" class="btn btn-page p-3 mb-3 rounded-3">Voir les
+                                        détails</button>
+                                </form>
+                            </div>
+                            <?php if (isset($_SESSION["user"]["id"]) && $_SESSION["user"]["id"] != $annonce["u_id"]) { ?>
+                                <div class="d-flex justify-content-center align-items-end">
+                                    <form action="index.php?url=favoris/add/<?= $annonce["a_id"] ?>" method="POST">
+                                        <button type="submit" class="btn btn-page p-3 mb-3 rounded-3">Ajouter aux
+                                            favoris</button>
+                                    </form>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

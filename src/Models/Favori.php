@@ -40,7 +40,7 @@ class Favori
             $peutCreerFavori = true;
 
             // Message avertissant l'utilisateur que le favori est créé et ajouté dans la base de données.
-            $reussi["peutCreerFavori"] = "Le favori a été crée, et ajouté dans la base de données.";
+            $reussi["peutCreerFavori"] = "L'article $annonceId a été ajouté aux favoris.";
 
             // var_dump($errors);
 
@@ -51,7 +51,7 @@ class Favori
 
         // Si on n'arrive pas à se connecter à la base de données, alors on déclanche une Exception PDOException pour avertir l'utilisateur que le favori n'a pas été crée et qu'il n'a pas été ajouté dans la base de données.
         catch (PDOException $errorPDOException) {
-            $errors["peutPasCreerFavori"] = "Le favori n'a pas été créé. " . $errorPDOException->getMessage();
+            $errors["peutPasCreerFavori"] = "L'article $annonceId n'a pas été ajouté aux favoris. " . $errorPDOException->getMessage();
             $peutCreerFavori = false;
             // var_dump($errors);
         }
@@ -112,7 +112,7 @@ class Favori
         try {
 
             // On fait la requête SQL pour récupérer la liste des favoris de l'utilisateur en question avec son id.
-            $sql = "SELECT * FROM favoris JOIN annonces WHERE annonces.u_id = $userId AND favoris.user_id = $userId;";
+            $sql = "SELECT * FROM favoris JOIN annonces ON favoris.user_id = $userId AND favoris.annonce_id = annonces.a_id;";
 
             // On se connecte à la base de données.
             $pdo = Database::getConnection();

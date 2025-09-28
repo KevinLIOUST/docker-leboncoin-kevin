@@ -17,9 +17,15 @@ $arrayUrl = explode('/', $url);
 // je récupère la page demandée index 0
 $page = $arrayUrl[0];
 
+// On récupère l'action d'ajouter ou de supprimer un favori par l'utilisateur
+$action = $arrayUrl[1] ?? null;
+
 // On récupère l'id pour pouvoir afficher les détails de l'annonce en question sur laquelle l'utilisateur a cliqué.
 // S'il y a pas d'id, il y a rien
 $id = $arrayUrl[1] ?? null;
+
+// On récupère l'identifiant de l'annonce à ajouter ou supprimer par l'utilisateur
+$idAnnonce = $arrayUrl[2] ?? null;
 
 // On regarde la page en question dans l'url (index.php?url=$page)
 switch ($page) {
@@ -91,6 +97,17 @@ switch ($page) {
     case "favoris":
         $objController = new FavorisController();
         $objController->index();
+
+        if ($action == "add") {
+            $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été ajoutée aux Favoris";
+            $objController->add($idAnnonce);
+            break;
+        } elseif ($action == "remove") {
+            $_SESSION["user"]["actionFavori"] = "L'annonce $idAnnonce a été supprimée des Favoris";
+            $objController->remove($idAnnonce);
+            break;
+        }
+
         break;
 
     // Page d'erreur qui s'affiche quand la page n'existe pas (Par exemple quand l'utilisateur modifie l'url à la main et met une page qui n'existe pas ou un identifiant d'article introuvable)

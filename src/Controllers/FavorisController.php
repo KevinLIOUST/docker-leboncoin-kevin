@@ -33,7 +33,7 @@ class FavorisController
     {
         $favori = new Favori();
         $favori->addFavori($_SESSION["user"]["id"], $annonceId);
-        header("Location: index.php?url=favoris");
+        echo "<script>window.location.href = 'index.php?url=favoris';</script>";
     }
 
     /**
@@ -45,6 +45,6 @@ class FavorisController
     {
         $favori = new Favori();
         $favori->removeFavori($_SESSION["user"]["id"], $annonceId);
-        header("Location: index.php?url=favoris");
+        echo "<script>window.location.href = 'index.php?url=favoris';</script>";
     }
 }

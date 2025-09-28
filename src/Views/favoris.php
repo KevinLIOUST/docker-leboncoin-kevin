@@ -1,5 +1,6 @@
 <?php
 // var_dump($data);
+var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +30,18 @@
     <?php include_once __DIR__ . "/../Template/header.php"; ?>
 
     <main>
-        <h1 class="d-flex justify-content-center mt-3">Favoris</h1>
+        <h1 class="d-flex justify-content-center mt-3">Favoris de <?= $_SESSION["user"]["pseudo"] ?></h1>
+        <div class="d-flex justify-content-center mt-3">
+            <p>
+                <b>
+                    <?php if (empty($data)) { ?>
+                        Il n'y a pas encore de favoris pour <?= $_SESSION["user"]["pseudo"] ?>.
+                    <?php } else { ?>
+                        <?= isset($_SESSION["user"]["actionFavori"]) ? $_SESSION["user"]["actionFavori"] : "" ?>
+                    <?php } ?>
+                </b>
+            </p>
+        </div>
         <div class="container">
             <?php foreach ($data as $annonce) { ?>
                 <div class="div-article m-3 p-3">
@@ -45,6 +57,12 @@
                             <form action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
                                 <button type="submit" class="btn btn-page p-3 mb-3 rounded-3">Voir les
                                     détails</button>
+                            </form>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-end">
+                            <form action="index.php?url=favoris/remove/<?= $annonce["a_id"] ?>" method="POST">
+                                <button type="submit" class="btn btn-supprime-annonce p-3 mb-3 rounded-3">Supprimer
+                                    favoris</button>
                             </form>
                         </div>
                     </div>
