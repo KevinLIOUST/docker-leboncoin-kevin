@@ -42,27 +42,21 @@
                         <img src="/uploads/<?= $annonce["a_picture"] ?>" class="card-img-top"
                             alt="/uploads/<?= $annonce["a_picture"] ?>">
                         <div class="card-body">
-                            <div class="taille-nom-article">
-                                <p class="card-title mt-2"><b>Nom : </b><br><?= $annonce["a_title"] ?></p>
-                            </div>
-                            <p class="mt-2"><b>Prix : </b><br><?= $annonce["a_price"] ?> €</p>
-                            <p class="mt-2"><b>Publiée le : </b><br><?= $annonce["a_publication"] ?></p>
+                            <p class="card-title mt-2"><b>Nom : </b><br><?= $annonce["a_title"] ?></p>
                             <div class="d-flex justify-content-center">
                                 <form action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
-                                    <button type="submit" class="btn btn-page p-3 mb-3 rounded-3">Voir les
-                                        détails</button>
+                                    <button type="submit" class="btn btn-details p-3 m-3  rounded-3"><i
+                                            class="bi bi-info-circle"></i></button>
                                 </form>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <button class="d-flex align-items-center justify-content-center btn-page p-3 mb-3 rounded-3"
+                                <button
+                                    class="d-flex align-items-center justify-content-center btn-modify p-3 m-3 rounded-3"
                                     type="submit" name="id" id="id"
-                                    onclick="window.location.href='index.php?url=modifierAnnonce/<?= $annonce['a_id'] ?>';">Modifier</button>
-                            </div>
-                            <div class="d-flex justify-content-center">
+                                    onclick="window.location.href='index.php?url=modifierAnnonce/<?= $annonce['a_id'] ?>';"><i
+                                        class="bi bi-pen"></i></button>
                                 <form action="index.php?url=profil/<?= $annonce["a_id"] ?>" method="POST">
                                     <button
-                                        class="d-flex align-items-center justify-content-center btn-supprime-annonce p-3 mb-3 rounded-3"
-                                        type="submit" name="id" id="id">Supprimer</button>
+                                        class="d-flex align-items-center justify-content-center btn-supprime-annonce p-3 m-3 rounded-3"
+                                        type="submit" name="id" id="id"><i class="bi bi-trash"></i></button>
                                 </form>
                             </div>
                         </div>

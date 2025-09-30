@@ -72,18 +72,8 @@ switch ($page) {
             if ($id == null) {
                 break;
             } else {
-                $objFavoriController = new FavorisController();
-                $objFavoriController->remove($id);
-
                 $objController = new AnnonceController();
                 $objController->supprimerAnnonce();
-
-                // $objAnnonce = new Favori();
-                // $tabIdAnnonces = $objAnnonce->findByUser($_SESSION["user"]["id"]);
-                // if ($_SESSION["user"]["id"] != $tabIdAnnonces["u_id"]) {
-
-                //     break;
-                // }
                 break;
             }
         } else {

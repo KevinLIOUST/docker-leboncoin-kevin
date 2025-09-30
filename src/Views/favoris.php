@@ -55,14 +55,12 @@
                         </div>
                         <div class="d-flex justify-content-center align-items-end">
                             <form action="index.php?url=details/<?= $annonce["a_id"] ?>" method="POST">
-                                <button type="submit" class="btn btn-page p-3 mb-3 rounded-3">Voir les
-                                    détails</button>
+                                <button type="submit" class="btn btn-details p-3 m-3 rounded-3"><i
+                                        class="bi bi-info-circle"></i></button>
                             </form>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-end">
                             <form action="index.php?url=favoris/remove/<?= $annonce["a_id"] ?>" method="POST">
-                                <button type="submit" class="btn btn-supprime-annonce p-3 mb-3 rounded-3">Supprimer
-                                    favori</button>
+                                <button type="submit" class="btn btn-supprime-annonce p-3 m-3 rounded-3"><i
+                                        class="bi bi-trash"></i></button>
                             </form>
                         </div>
                     </div>

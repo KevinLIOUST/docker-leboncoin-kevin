@@ -213,7 +213,7 @@ class Annonce
     }
 
     /**
-     * Méthode pour supprimer l'annonce enquestion sur laquelle l'utilisateur a cliqué.
+     * Méthode pour supprimer l'annonce en question sur laquelle l'utilisateur a cliqué.
      * @param int $annonceId L'identifiant de l'annonce en question
      */
     public function deleteAnnonce(int $annonceId, int $userId)
@@ -223,7 +223,7 @@ class Annonce
         try {
 
             // On fait la requête SQL pour récupérer l'annonce en question avec l'id.
-            $sql = "DELETE FROM annonces WHERE a_id = $annonceId AND u_id = $userId;";
+            $sql = "DELETE FROM favoris WHERE annonce_id = $annonceId AND user_id != $userId; DELETE FROM annonces WHERE a_id = $annonceId";
 
             // On se connecte à la base de données.
             $pdo = Database::getConnection();

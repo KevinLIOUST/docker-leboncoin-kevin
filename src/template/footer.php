@@ -1,4 +1,4 @@
-<footer>
+<footer class="mt-auto">
     <div class="row">
         <div class="col mb-3 mb-sm-0">
             <div class="card background-color-footer">

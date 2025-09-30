@@ -25,7 +25,7 @@
         <h1 class="text-center mt-3">Bienvenue au magasin de composants PC spécial geek !</h1>
         <h2 class="text-center mt-5">Ici, vous trouverez plein de composants pour PC, mais designer de façon geek comme
             par exemple une carte graphique NVIDIA GeForce RTX 5090 ASUS ROG ASTRAL PixelCore Galaxy Edition !</h2>
-        <h2 class="text-center mt-5">Amusez-vous bien, mais faites gaffe à votre thune !</h2>
+        <h2 class="text-center mt-5">Amusez-vous bien, mais faites attention à votre argent !</h2>
     </main>
 
     <?php include_once __DIR__ . "/../Template/footer.php"; ?>

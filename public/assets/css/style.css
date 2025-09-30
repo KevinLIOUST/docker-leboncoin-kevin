@@ -78,12 +78,60 @@ nav ul {
   width: 15rem;
 }
 
+.btn-modify {
+  font-size: large;
+  border: 8px solid #2d968c;
+  background-color: #4d5deb;
+  color: white;
+  width: auto;
+}
+
+.btn-modify:hover {
+  font-size: large;
+  border: 8px solid #2d968c;
+  background-color: #7682e7;
+  color: white;
+  width: auto;
+}
+
+.btn-details {
+  font-size: large;
+  border: 8px solid #2d968c;
+  background-color: #4d5deb;
+  color: white;
+  width: auto;
+}
+
+.btn-details:hover {
+  font-size: large;
+  border: 8px solid #2d968c;
+  background-color: #7682e7;
+  color: white;
+  width: auto;
+}
+
+.btn-favoris {
+  font-size: large;
+  border: 8px solid #2d968c;
+  background-color: #4d5deb;
+  color: white;
+  width: auto;
+}
+
+.btn-favoris:hover {
+  font-size: large;
+  border: 8px solid #2d968c;
+  background-color: #7682e7;
+  color: white;
+  width: auto;
+}
+
 .btn-supprime-annonce {
   font-size: large;
   border: 8px solid #2d968c;
   background-color: #eb4d4d;
   color: white;
-  width: 15rem;
+  width: auto;
 }
 
 .btn-supprime-annonce:hover {
@@ -91,7 +139,7 @@ nav ul {
   border: 8px solid #2d968c;
   background-color: #f38484;
   color: white;
-  width: 15rem;
+  width: auto;
 }
 
 .taille-nom-article {
@@ -100,6 +148,7 @@ nav ul {
 
 .container {
   display: grid;
+  width: 100%;
 
   /* On fait un repeat(auto-fit, minmax(...)) pour un wrapping fluide */
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
