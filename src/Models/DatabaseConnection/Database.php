@@ -7,6 +7,7 @@
 
 namespace App\Models\DatabaseConnection;
 
+use Dotenv\Dotenv;
 use PDO;
 use PDOException;
 
@@ -29,36 +30,44 @@ class Database
          */
 
         // Variable d'environnement MYSQL_HOST
-        $host = "db";
 
         // Le nom de la base de données
         // Variable d'environnement MYSQL_DATABASE
-        $dbname = "leboncoin";
 
         // Le nom de l'utilisateur
         // Variable d'environnement MYSQL_USER
-        $usernameDatabase = "root";
 
         // Le mot de passe de l'utilisateur
         // Variable d'environnement MYSQL_PASSWORD
-        $passwordDatabase = "root";
+
+        // Charger le fichier .env
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../../');
+        $dotenv->load();
+
+        // Variables communes
+        $dbHost = $_ENV['MYSQL_HOST'];
+        $dbName = $_ENV['MYSQL_DATABASE'];
+        $dbUser = $_ENV['MYSQL_USER'];
+        $dbPass = $_ENV['MYSQL_PASSWORD'];
+        $dbPort = $_ENV['MYSQL_PORT'];
+
+        // On choisit la base selon APP_ENV
+        // $db_name = $_ENV['APP_ENV'] === 'test' ? $_ENV['DB_NAME_TEST'] : $_ENV['DB_NAME_DEV'];
+
+        // $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC];
 
         // On essaye de se connecter.
         try {
+            $dsn = "mysql:host=$dbHost;dbname=$dbName;port:$dbPort;";
+            $pdo = new PDO($dsn, $dbUser, $dbPass);
 
-            /**
-             * Une connexion PDO à une base de données nécessite la création d’un nouvel objet PDO avec un nom de source de données (DSN), un nom d’utilisateur et un mot de passe.
-             */
-            $connection = new PDO("mysql:host=$host;dbname=$dbname", $usernameDatabase, $passwordDatabase);
-            $message = "Connection à la base de données $dbname avec $host réussie.";
+            // Configurer PDO pour afficher les erreurs
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            return $connection;
+            return $pdo;
 
-            /**
-             * Un message d'erreur sera envoyé à l'utilisateur si la connection n'a pas marché.
-             */
-        } catch (PDOException $erreurPDOException) {
-            die("Impossible de se connecter à la base de données $dbname :" . $erreurPDOException->getMessage());
+        } catch (PDOException $e) {
+            die("Erreur de connexion : " . $e->getMessage());
         }
     }
 }

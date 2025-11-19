@@ -5,17 +5,13 @@
  * sont configurés pour chercher automatiquement ce fichier comme page d'accueil par défaut d'un site.
  */
 
-/**
- * La page index.php est la première lue car les serveurs web, comme Apache,
- * sont configurés pour chercher automatiquement ce fichier comme page d'accueil par défaut d'un site.
- */
-
 // use App\Models\DatabaseConnection\Database;
 
 // Ici, on va chercher les classes pour les utiliser
 // Le "App" correspond à "src/" dans l'arborescence du projet dans le composer.json (PSR4)
 use App\Models\Annonce;
 use App\Models\User;
+use Dotenv\Dotenv;
 
 // session_start(), elle permet de démarrer une nouvelle session ou de reprendre une session existante.
 /**
@@ -26,6 +22,10 @@ use App\Models\User;
 session_start();
 
 require_once __DIR__ . "/../vendor/autoload.php";
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
 require_once __DIR__ . "/routeur.php";
 
 // $objUser = new User();
